@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms import StringField, DateField, IntegerField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
 from app.models import User
 
@@ -10,6 +10,37 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Sign In')
 
 
+class ProjectForm(FlaskForm):
+    ProjName = StringField('ProjName')
+    total_diff = StringField('total_diff')
+
+
+class TeamForm(FlaskForm):
+    team_name = StringField('team_name')
+
+
+class SprintForm(FlaskForm):
+    end_date = DateField('end_date')
+    Start_date = DateField('total_diff')
+
+
+class User_StoriesForm(FlaskForm):
+    Difficulty = IntegerField('Difficulty')
+    Acceptance_criteria = StringField('Acceptance_criteria')
+    Status = StringField('Status')
+    Description = StringField('Descriprion')
+    Github_link = StringField('Github_link')
+
+class TodoForm(FlaskForm):
+    status = BooleanField('stats')
+    text = StringField('text')
+
+class requirementsForm(FlaskForm):
+    status = BooleanField('stats')
+    text = StringField('text')
+
+class RoleForm(FlaskForm):
+    title = StringField('title')
 
 class RegistrationForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
