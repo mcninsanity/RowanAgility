@@ -10,8 +10,14 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
+    <!-- W3.CSS -->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
     <!-- Style Sheet CSS -->
     <link type="text/css" rel="stylesheet" href="../static/css/style.css">
+
+    <!-- Hover CSS -->
+    <link type="text/css" rel="stylesheet" href="../static/css/hover-min.css">
 
     <!-- Plotly -->
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
@@ -21,17 +27,50 @@
 </head>
 <body>
 
-<h2>Project</h2>
 
+<h1>Project Name</h1>
+<p id="summary">Project Summary</p>
+<div class="center">
+    <button href="#" class="definition-of-done"
+                    data-toggle="modal" data-target="#DoD">Definition of Done</button>
+</div>
+
+
+
+<!-- Creates two columns with Project management buttons and burnup chart -->
 <div class="container">
     <div class="row">
-        <div class="col-4">
-            One of three columns
+        <div class="col">
+            <!-- Project Management Buttons -->
+            <a href="#" class="button project-page-button hvr-shrink">Sprint Management</a>
+            <a href="#" class="button project-page-button hvr-shrink">Current Sprint</a>
+            <a href="https://www.github.com" class="button project-page-button hvr-shrink">Project Github</a>
+            <a href="#" class="button project-page-button hvr-shrink">Team Page</a>
         </div>
         <div class="col-8">
+            <!-- Burnup Chart -->
             <div id="burnup" style="width:100%;"></div>
         </div>
     </div>
+</div>
+
+<!-- Definition of Done Modal -->
+<div class="modal fade" id="DoD" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="DoD title">Definition of Done</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <textarea class="form-control" id="message-text" style="height:500px"></textarea>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- Optional JavaScript -->
