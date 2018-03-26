@@ -12,11 +12,10 @@ class LoginForm(FlaskForm):
 
 class ProjectForm(FlaskForm):
     ProjName = StringField('ProjName')
-    total_diff = StringField('total_diff')
-
-
-class TeamForm(FlaskForm):
+    submit = SubmitField('Register')
     team_name = StringField('team_name')
+
+
 
 
 class SprintForm(FlaskForm):

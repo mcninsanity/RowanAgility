@@ -70,3 +70,17 @@ def project():
     completeDiff = [0, 10, 20, 33, 55]
 
     return render_template('project.html', sprints=sprints, totalDiff=totalDiff, completeDiff=completeDiff)
+
+@app.route('/CreateProject', methods=['GET', 'POST'])
+def CreateProject():
+    form = ProjectForm()
+    if form.validate_on_submit():
+        project = Project(ProjName=form.ProjName.data)
+        team = Team(team_name=form.team_name.data)
+        db.session.add(project)
+        db.session.commit()
+        db.session.add(team)
+        db.session.commit()
+        flash('Congratulations, you made a project!')
+        return redirect(url_for('project'))
+    return render_template('CreateProject.html', title='Register', form=form)
