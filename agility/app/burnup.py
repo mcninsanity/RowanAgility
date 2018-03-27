@@ -10,7 +10,9 @@ def home():
     totalDiff = [50, 65, 80, 70]
     completeDiff = [0, 20, 33, 55]
 
-    return render_template('project.html', sprints=sprints, totalDiff=totalDiff, completeDiff=completeDiff)
+    #return render_template('project.html', sprints=sprints, totalDiff=totalDiff, completeDiff=completeDiff)
+
+    return render_template('loginNEW.html')
 
 
 if __name__ == "__main__":

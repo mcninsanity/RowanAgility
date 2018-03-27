@@ -3,7 +3,7 @@ body {
     background-attachment: fixed;
     background-size: 100%;
 }
-
+/*
 @font-face {
    font-family: agilityFont;
    src: url(quotus-bold.ttf);
@@ -12,9 +12,10 @@ body {
 * {
     font-family: agilityFont;
 }
+*/
 
 h1 {
-    font-family: agilityFont;
+    /*font-family: agilityFont;*/
     color: blue;
     font-size: 50px;
     text-align: center;
@@ -22,6 +23,17 @@ h1 {
 
 .center {
     text-align: center;
+}
+
+.login-container {
+    background-color: #d0d0d0;
+    text-align: center;
+    width: 50%;
+    border: 2px solid black;
+}
+
+.login-label {
+    color: blue;
 }
 
 #summary {
@@ -73,4 +85,8 @@ h1 {
 
 .project-page-button {
     width: 100%;
+}
+
+.user-page-button {
+    width: 25%;
 }
