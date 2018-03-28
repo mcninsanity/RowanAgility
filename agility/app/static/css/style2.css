@@ -1,0 +1,91 @@
+body {
+    background-image: url("white-background3.jpeg");
+    background-attachment: fixed;
+    background-size: 100%;
+}
+/*
+@font-face {
+   font-family: agilityFont;
+   src: url(quotus-bold.ttf);
+}
+* {
+    font-family: agilityFont;
+}
+*/
+
+h1 {
+    /*font-family: agilityFont;*/
+    color: blue;
+    font-size: 50px;
+    text-align: center;
+}
+
+.center {
+    text-align: center;
+}
+
+.login-container {
+    background-color: #d0d0d0;
+    text-align: center;
+    width: 50%;
+    border: 2px solid black;
+}
+
+.login-label {
+    color: blue;
+}
+
+#summary {
+    color: dodgerblue;
+    font-size: 20px;
+    text-align: center;
+}
+
+.definition-of-done {
+    background-color: blue;
+    border: 2px solid black;
+    color: white;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition-duration: 0.4s;
+    width: 200px;
+}
+
+.definition-of-done:hover {
+    background-color: darkblue;
+}
+
+
+.button {
+    /*background-color: dodgerblue;*/
+    background-image: url("blue-background2.jpg");
+    background-size: 500px;
+    background-position: center top;
+    border: 2px solid black;
+    color: white;
+    padding: 15px 25px;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 8px;
+    /*transition-duration: 0.4s;*/
+    margin: 10px 10px;
+
+}
+
+.button:hover {
+    color: white;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+
+.project-page-button {
+    width: 100%;
+}
+
+.user-page-button {
+    width: 25%;
+}

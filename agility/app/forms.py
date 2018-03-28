@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, DateField, IntegerField, PasswordField, BooleanField, SubmitField
+from wtforms import StringField, IntegerField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
 from app.models import User
 
@@ -11,17 +11,9 @@ class LoginForm(FlaskForm):
 
 
 class ProjectForm(FlaskForm):
-    ProjName = StringField('ProjName')
-    submit = SubmitField('Register')
-    team_name = StringField('team_name')
-
-
-
-
-class SprintForm(FlaskForm):
-    end_date = DateField('end_date')
-    Start_date = DateField('total_diff')
-
+    ProjName = StringField('Project Name')
+    submit = SubmitField('Submit')
+    team_name = StringField('Team Name')
 
 class User_StoriesForm(FlaskForm):
     Difficulty = IntegerField('Difficulty')
@@ -58,3 +50,5 @@ class RegistrationForm(FlaskForm):
         user = User.query.filter_by(email=email.data).first()
         if user is not None:
             raise ValidationError('Please use a different email address.')
+
+
