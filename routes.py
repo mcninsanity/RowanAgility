@@ -167,6 +167,15 @@ def sprint_endpoint(idsprint):
 
     return render_template('sprint.html', user_story_ids=user_story_ids)
 
+'''
+def createCard(iduser_stories):
+     descrip = db.engine.execute("select Description from user_stories where user_stories.iduser_stories = "+iduser_stories)
+     diff = db.engine.execute("select Difficulty from user_stories where user_stories.iduser_stories = "+iduser_stories)
+     accept = db.engine.execute("select Acceptance_criteria from user_stories where user_stories.iduser_stories = "+iduser_stories)
+     status = db.engine.execute("select status from user_stories where user_stories.iduser_stories = "+iduser_stories)
+     
+'''
+
 
 
 
