@@ -13,9 +13,9 @@ from werkzeug.urls import url_parse
 @login_required
 def index():
     projects = db.engine.execute("select ProjName from project join team_project_table on"
-                             " (project.idProject = team_project_table.idProject) join team on"
-                             " (team_project_table.idteam = team.idteam) join team_user_table on"
-                             " (team.idteam = team_user_table.idteam) where team_user_table.iduser = " + current_user.get_id())
+                             " (project.project_id = team_project_table.project_id) join team on"
+                             " (team_project_table.team_id = team.team_id) join team_user_table on"
+                             " (team.team_id = team_user_table.team_id) where team_user_table.user_id = " + current_user.get_id())
 
     names = []
     for name in projects:
@@ -26,7 +26,7 @@ def index():
 @app.route('/logintest', methods=['GET', 'POST'])
 def logintest():
     if current_user.is_authenticated:
-        return redirect(url_for('index'))# try redirect to '/user/'+str(USer.query.get(iduser))'
+        return redirect(url_for('index'))# try redirect to '/user/'+str(USer.query.get(user_id))'
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
@@ -36,7 +36,7 @@ def logintest():
         login_user(user, remember=form.remember_me.data)
         next_page = request.args.get('next')
         if not next_page or url_parse(next_page).netloc != '':
-            next_page = url_for('index')# try redirect to '/user/'+str(USer.query.get(iduser))'
+            next_page = url_for('index')# try redirect to '/user/'+str(USer.query.get(user_id))'
         return redirect(next_page)
     return render_template('testlogin.html',  title='Sign In', form=form)
 	
@@ -44,7 +44,7 @@ def logintest():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('index'))# try redirect to '/user/'+str(USer.query.get(iduser))'
+        return redirect(url_for('index'))# try redirect to '/user/'+str(USer.query.get(user_id))'
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
@@ -54,7 +54,7 @@ def login():
         login_user(user, remember=form.remember_me.data)
         next_page = request.args.get('next')
         if not next_page or url_parse(next_page).netloc != '':
-            next_page = url_for('index')# try redirect to '/user/'+str(USer.query.get(iduser))'
+            next_page = url_for('index')# try redirect to '/user/'+str(USer.query.get(user_id))'
         return redirect(next_page)
     return render_template('login.html',  title='Sign In', form=form)
 
@@ -80,16 +80,35 @@ def register():
 @app.route('/project/<ProjName>')
 @login_required
 def project_endpoint(ProjName):
-    sprints = [1, 2, 3, 4]
-    totalDiff = [50, 65, 80, 70]
-    completeDiff = [0, 20, 33, 55]
+    sprints = db.engine.execute("select Sprint_num from sprint join project_sprint_table on"
+                                 " (sprint.sprint_id = project_sprint_table.sprint_id) join project on"
+                                 " (project_sprint_table.project_id = project.project_id)"
+                                 "where project.ProjName = " + ProjName)
+    big = db.engine.execute("select SUM(Difficulty) from user_stories join user_stories_sprint_table on"
+                            " (user_stories.user_id_Stories = user_stories_sprint_table.user_id_Stories) join sprint on"
+                            " (user_stories_sprint_table.sprint_id = sprint.sprint_id) join project_sprint_table on"
+                            " (sprint.sprint_id = project_sprint_table.sprint_id) join project on"
+                            " (project_sprint_table.project_id = project.project_id)"
+                            "where project.ProjName = " + ProjName)
+    completeDiff = []
+    totalDiff = []
+    for num in sprints:
+        completeDiff.append(big)
+        totalDiff.append(db.engine.execute("select SUM(Difficulty) from user_stories join user_stories_sprint_table on"
+                            " (user_stories.user_id_Stories = user_stories_sprint_table.user_id_Stories) join sprint on"
+                            " (user_stories_sprint_table.sprint_id = sprint.sprint_id) join project_sprint_table on"
+                            " (sprint.sprint_id = project_sprint_table.sprint_id) join project on"
+                            " (project_sprint_table.project_id = project.project_id)"
+                            "where project.ProjName = " + ProjName + " and sprint.sprint_num = " + num))
+    #totalDiff = [50, 65, 80, 70]
+    #completeDiff = [0, 20, 33, 55]
     return render_template('project.html', ProjName=ProjName, sprints=sprints, totalDiff=totalDiff, completeDiff=completeDiff)
 
 
 @app.route('/CreateProject', methods=['GET', 'POST'])
 @login_required
 def CreateProject():
-    teams = db.engine.execute('select team_name from team join team_user_table on (team.idteam = team_user_table.idteam) where team_user_table.iduser = '+current_user.get_id())
+    teams = db.engine.execute('select team_name from team join team_user_table on (team.team_id = team_user_table.team_id) where team_user_table.user_id = '+current_user.get_id())
     team_names = []
     for name in teams:
         team_names.append(name[0])
@@ -101,15 +120,15 @@ def CreateProject():
         team = Team(team_name=form.team_name.data)
         ''' TEST VALUES '''
         '''
-        iduser = current_user.get_id()
-        idteamqry = db.engine.execute("select idteam from team where team.team_name = '"+ form.team_name.data+ "'")
-        #team_user_tbl = team_user_table(iduser = current_user.get_id(), idteam = db.engine.execute("select idteam from team where team.team_name = '"+ form.team_name.data+"'"))
-        #team_project_tbl = team_project_table(idteam = db.engine.execute("select idteam from team where team.team_name = '"+ form.team_name.data, idProject = db.engine.execute("select idProject from project where project.ProjName = '"+ form.ProjName.data+"'")+"'"))
-        team_user_tbl = team_user_table(iduser = current_user.get_id(), idteam = idteamqry)
+        user_id = current_user.get_id()
+        team_idqry = db.engine.execute("select team_id from team where team.team_name = '"+ form.team_name.data+ "'")
+        #team_user_tbl = team_user_table(user_id = current_user.get_id(), team_id = db.engine.execute("select team_id from team where team.team_name = '"+ form.team_name.data+"'"))
+        #team_project_tbl = team_project_table(team_id = db.engine.execute("select team_id from team where team.team_name = '"+ form.team_name.data, project_id = db.engine.execute("select project_id from project where project.ProjName = '"+ form.ProjName.data+"'")+"'"))
+        team_user_tbl = team_user_table(user_id = current_user.get_id(), team_id = team_idqry)
 
-        idteam = db.engine.execute("select idteam from team where team.team_name = '"+ form.team_name.data+ "'")
-        idprojectqry = db.engine.execute("select idProject from project where project.ProjName = '"+ form.ProjName.data+"'") 
-        team_project_tbl = team_project_table(idteam= idteamqry, idProject = idprojectqry)
+        team_id = db.engine.execute("select team_id from team where team.team_name = '"+ form.team_name.data+ "'")
+        project_idqry = db.engine.execute("select project_id from project where project.ProjName = '"+ form.ProjName.data+"'") 
+        team_project_tbl = team_project_table(team_id= team_idqry, project_id = project_idqry)
         '''
         db.session.add(project)
         db.session.add(team)
@@ -127,9 +146,9 @@ def CreateProject():
 #@login_required
 #def team_endpoint(ProjName):
   
- #   members = db.engine.execute("select username from user join team_user_table on (user.iduser = team_user_table.iduser) "
- #                               "join team on (team_user_table.idteam = team.idteam) join team_project_table on (team.idteam = team_project_table.idteam) "
-  #                              "join project on (team_project_table.idproject = project.idproject) where project.ProjName = '{ProjName}'".format(ProjName=ProjName))
+ #   members = db.engine.execute("select username from user join team_user_table on (user.user_id = team_user_table.user_id) "
+ #                               "join team on (team_user_table.team_id = team.team_id) join team_project_table on (team.team_id = team_project_table.team_id) "
+  #                              "join project on (team_project_table.project_id = project.project_id) where project.ProjName = '{ProjName}'".format(ProjName=ProjName))
   
    # teamnames = []
     #for teamname in members:

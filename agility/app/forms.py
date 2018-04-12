@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, IntegerField, PasswordField, BooleanField, SubmitField
+from wtforms import StringField, IntegerField, PasswordField, BooleanField, SubmitField, DateField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
 from app.models import User
 
@@ -19,6 +19,13 @@ class User_StoriesForm(FlaskForm):
     Difficulty = IntegerField('Difficulty')
     Acceptance_criteria = StringField('Acceptance_criteria')
     Status = StringField('Status')
+    Description = StringField('Descriprion')
+    Github_link = StringField('Github_link')
+
+class Sprint(FlaskForm):
+    end_date = DateField('end_date')
+    Start_date = DateField('Start_date')
+    Sprint_num = StringField('Sprint_num')
     Description = StringField('Descriprion')
     Github_link = StringField('Github_link')
 
