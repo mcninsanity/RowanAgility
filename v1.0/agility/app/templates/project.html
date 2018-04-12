@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ ProjName }}</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <style>
+
+    /* Create 2 unequal columns that floats next to each other */
+.column {
+    float: left;
+    padding: 10px;
+}
+/* Create left column that takes up 30% of the screen
+.column.left {
+    width: 30%;
+}
+
+/* Create right column that takes up 70% of the screen.
+.column.right {
+    width: 70%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other on smaller screens (600px wide or less) */
+@media (max-width: 600px) {
+    .column {
+        width: 100%;
+    }
+}
+    </style>
+
+</head>
+<body>
+
+<div class="w3-bar w3-blue">
+  <a href="#" class="w3-bar-item w3-button w3-hover-blue w3-mobile w3-light-blue w3-ripple w3-border w3-border-black" style="width:33%">Back</a>
+  <a href="/index" class="w3-bar-item w3-button w3-hover-blue w3-mobile w3-light-blue w3-ripple w3-border w3-border-black" style="width:34%">Home</a>
+  <a href="/logout" class="w3-bar-item w3-button w3-hover-blue w3-mobile w3-light-blue w3-ripple w3-border w3-border-black" style="width:33%">Sign out</a>
+</div>
+
+<h1 style="text-align:center; font-size:300%">{{ProjName}}</h1>
+
+<div class="row">
+    <div class="column left">
+        <input type="button" style="width:100%" class="w3-btn w3-hover-blue w3-ripple w3-light-blue w3-border w3-border-black w3-round" value="Sprint Management">
+        <br></br>
+        <input type="button" style="width:100%" class="w3-btn w3-hover-blue w3-ripple w3-light-blue w3-border w3-border-black w3-round" value="Current Sprint">
+        <br></br>
+        <a href="https://www.github.com" style="width:100%" class="w3-btn w3-hover-blue w3-ripple w3-light-blue w3-border w3-border-black w3-round">Project Github
+        </a>
+        <br></br>
+        <a href="/team/{{ProjName}}" type="button" style="width:100%" class="w3-btn w3-hover-blue w3-ripple w3-light-blue w3-border w3-border-black w3-round">Team Page</a>
+	<br></br>
+    </div>
+
+    <div class="column right">
+        <div id="myDiv" style="width:100%;"></div>
+    </div>
+</div>
+
+
+
+
+<script>
+
+var sprints = {{ sprints }}
+var totalDiff = {{ totalDiff }}
+var completeDiff = {{ completeDiff }}
+
+var trace0 = {
+  x: sprints,
+  y: totalDiff,
+  type: 'lines',
+  name: 'Total Difficulty'
+};
+
+var trace1 = {
+  x: sprints,
+  y: completeDiff,
+  type: 'lines',
+  name: 'Completed Difficulty'
+};
+
+var layout = {
+  title: 'Burn-Up Chart for Project',
+  xaxis: {
+    title: 'Sprint',
+    showgrid: false,
+  },
+  yaxis: {
+    title: 'Difficulty (points)',
+    showline: false
+  }
+};
+
+var data = [trace0, trace1];
+
+Plotly.newPlot('myDiv', data, layout);
+</script>
+
+
+
+</body>
+</html>
