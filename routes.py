@@ -141,31 +141,56 @@ def CreateProject():
 @login_required
 def sprint_manage_endpoint(idproject):
 
-    sprints = db.engine.execute("select idsprint from sprint_project_table where sprint_project_table.idproject = "+idproject)
+    sprints = db.engine.execute("select sprint_id from project_sprint_table where project_sprint_table.project_id = "+idproject)
     # may have to use an order by start date to get them in the proper order
 
-    sprint_ids = []
+    sprintids = []
     for sprint in sprints:
-        sprint_ids.append(sprint[0])
+        sprintids.append(sprint[0])
 
-    pb = db.engine.execute("select iduser_stories from user_stories_sprint_table where user_stories_sprint_table.idsprint in "
-                           "(select idsprint from sprint_project_table where sprint_project_table.idproject = "+idproject+")")
+    pb = db.engine.execute("select user_stories_id from user_stories_sprint_table where user_stories_sprint_table.sprint_id in "
+                           "(select sprint_id from project_sprint_table where project_sprint_table.project_id = "+idproject+")")
 
-    return render_template('sprintmanage.html', sprint_ids=sprint_ids)
+    prodBackIds = []
+    for prodback in pb:
+        prodBackIds.append(prodback[0])
+
+    return render_template('sprintmanage.html', sprintids=sprintids, prodBackIds=prodBackIds, myfunction=getTitle)
 
 @app.route('/sprint')
 @login.required
 def sprint_endpoint(idsprint):
 
-    us = db.engine.execute("select iduser_stories from user_stories_sprint_table where user_stories_sprint_table.idsprint = "+idsprint)
-    # plan is to have a function that gets called from the html file which will use the user story ids to populate a 'card'
-    # object with the proper info to be displayed in a list
-    user_story_ids = []
+    todo_us = db.engine.execute("select user_stories_id from user_stories_sprint_table "
+                                "where user_stories_sprint_table.sprint_id = "+idsprint+" and user_stories_sprint_table.status = 'To Do'")
 
-    for user_story in us:
-        user_story_ids.append(user_story[0])
+    todo = []
+    for user_story in todo_us:
+        todo.append(us[0])
 
-    return render_template('sprint.html', user_story_ids=user_story_ids)
+    inprogress_us = db.engine.execute("select user_stories_id from user_stories_sprint_table "
+                                      "where user_stories_sprint_table.sprint_id = "+idsprint+" and user_stories_sprint_table.status = 'In Progress'")
+
+    inprogress = []
+    for ip_us in inprogress_us:
+        inprogress.append(ip_us[0])
+
+    done_us = db.engine.execute("select user_stories_id from user_stories_sprint_table "
+                                "where user_stories_sprint_table.sprint_id = "+idsprint+" and user_stories_sprint_table.status = 'Done'")
+
+    done = []
+    for dn_us in done_us:
+        done.append(dn_us[0])
+
+    return render_template('sprint.html', sprintbacklog=sprintbacklog, todo=todo, inprogress=inprogress, done=done)
+
+
+def getTitle(id):
+    userstorytitle = db.engine.execute("select title from user_stories where user_stories.user_stories_id = "+id)
+    return str(userstorytitle)
+
+
+
 
 '''
 def createCard(iduser_stories):
