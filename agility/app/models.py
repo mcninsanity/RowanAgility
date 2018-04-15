@@ -43,7 +43,7 @@ user_stories_sprint_table = db.Table('user_stories_sprint_table',
                 db.Column('sprint_id', db.Integer, db.ForeignKey('sprint.sprint_id')),
                 db.Column('user_stories_id', db.Integer, db.ForeignKey('user_stories.user_stories_id'))
 )
-
+#check
 class User(UserMixin, db.Model):
     __tablename__ = 'user'
     user_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
