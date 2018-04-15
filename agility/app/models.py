@@ -20,7 +20,7 @@ team_sprint_table = db.Table('team_sprint_table',
 
 project_sprint_table = db.Table('project_sprint_table',
                 db.Column('sprint_id', db.Integer, db.ForeignKey('sprint.sprint_id')),
-                db.Column('project_id', db.Integer, db.ForeignKey('team.project_id'))
+                db.Column('project_id', db.Integer, db.ForeignKey('project.project_id'))
 )
 
 role_user_table = db.Table('role_user_table',
@@ -85,8 +85,8 @@ class Team(db.Model):
     team_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     team_name = db.Column(db.String(45))
     id = synonym('team_id')
-    projects = db.relationship('Project', secondary=team_project_table, backref=db.backref('projteams', lazy='dynamic'))
-    users = db.relationship('User', secondary=team_user_table, backref=db.backref('teamusers', lazy='dynamic'))
+    #projects = db.relationship('Project', secondary=team_project_table, backref=db.backref('projteams', lazy='dynamic'))
+    #users = db.relationship('User', secondary=team_user_table, backref=db.backref('teamusers', lazy='dynamic'))
     sprints = db.relationship('Sprint', secondary=team_sprint_table, backref=db.backref('teamsprint', lazy='dynamic'))
 
 class To_do(db.Model):
@@ -94,8 +94,8 @@ class To_do(db.Model):
     idto_do = db.Column(db.Integer, primary_key=True, autoincrement=True)
     status = db.Column(db.Boolean)
     text = db.Column(db.String(45))
-    user_stories_id = db.Column(db.Integer, db.ForeignKey('User_Stories.user_stories_id'))
-    todo_us = db.relationship('User_Stories', backref=db.backref('todo_userstories', lazy='dynamic'))
+    user_stories_id = db.Column(db.Integer, db.ForeignKey('user_stories.user_stories_id'))
+    #todo_us = db.relationship('User_Stories', backref=db.backref('todo_userstories', lazy='dynamic'))
 
 class Requirements(db.Model):
     __tablename__ = 'requirements'
@@ -103,7 +103,7 @@ class Requirements(db.Model):
     status = db.Column(db.Boolean)
     text = db.Column(db.String(45))
     user_stories_id = db.Column(db.Integer, db.ForeignKey('user_stories.user_stories_id'))
-    todo_us = db.relationship('User_Stories', backref=db.backref('req_userstories', lazy='dynamic'))
+    #req_us = db.relationship('User_Stories', backref=db.backref('req_userstories', lazy='dynamic'))
 
 class User_Stories(db.Model):
     __tablename__ = 'user_stories'
@@ -113,14 +113,17 @@ class User_Stories(db.Model):
     Description = db.Column(db.String(400))
     Github_link = db.Column(db.String(100))
     Difficulty = db.Column(db.Integer)
-    users = db.relationship('User', secondary=works_on, backref=db.backref('ususerr', lazy='dynamic'))
+    #users = db.relationship('User', secondary=works_on, backref=db.backref('ususerr', lazy='dynamic'))
     sprints = db.relationship('Sprint', secondary=user_stories_sprint_table, backref=db.backref('teamusers', lazy='dynamic'))
+    us_todo = db.relationship('To_do', backref=db.backref('usto_do'))
+    us_req = db.relationship('Requirements', backref=db.backref('us_req'))
+
 
 class Role(db.Model):
     __tablename__ = 'role'
     role_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     title = db.Column(db.String(45))
-    users = db.relationship('User', secondary=role_user_table, backref=db.backref('roleusers', lazy='dynamic'))
+    #users = db.relationship('User', secondary=role_user_table, backref=db.backref('roleusers', lazy='dynamic'))
 
 class Sprint(db.Model):
     __tablename__ = 'sprint'
@@ -128,6 +131,6 @@ class Sprint(db.Model):
     end_date = db.Column(db.DateTime)
     Start_date = db.Column(db.DateTime)
     Sprint_num = db.Column(db.Integer)
-    Teams = db.relationship('Team', secondary=team_sprint_table, backref=db.backref('teamsprints', lazy='dynamic'))
-    user_stories = db.relationship('User_Stories', secondary=user_stories_sprint_table, backref=db.backref('sprintus', lazy='dynamic'))
-    projects = db.relationship('Project', secondary=project_sprint_table, backref=db.backref('sprintproj', lazy='dynamic'))
+    #Teams = db.relationship('Team', secondary=team_sprint_table, backref=db.backref('teamsprints', lazy='dynamic'))
+    #user_stories = db.relationship('User_Stories', secondary=user_stories_sprint_table, backref=db.backref('sprintus', lazy='dynamic'))
+    #projects = db.relationship('Project', secondary=project_sprint_table, backref=db.backref('sprintproj', lazy='dynamic'))

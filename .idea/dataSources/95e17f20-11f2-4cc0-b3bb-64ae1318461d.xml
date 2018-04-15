@@ -977,7 +977,7 @@
       <Engine>InnoDB</Engine>
       <Collation>utf8_general_ci</Collation>
     </table>
-    <column id="246" parent="230" name="idProject">
+    <column id="246" parent="230" name="project_id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
@@ -997,53 +997,54 @@
     </column>
     <key id="249" parent="230" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
-      <ColNames>idProject</ColNames>
+      <ColNames>project_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="250" parent="231" name="idproject_sprint_table">
+    <column id="250" parent="231" name="project_sprint_table_id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="251" parent="231" name="idsprint">
+    <column id="251" parent="231" name="sprint_id">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="252" parent="231" name="idproject">
+    <column id="252" parent="231" name="project_id">
       <Position>3</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
     <index id="253" parent="231" name="idsprint_idx">
-      <ColNames>idsprint</ColNames>
+      <ColNames>sprint_id</ColNames>
       <Type>btree</Type>
     </index>
     <index id="254" parent="231" name="idproject_idx">
-      <ColNames>idproject</ColNames>
+      <ColNames>project_id</ColNames>
       <Type>btree</Type>
     </index>
     <key id="255" parent="231" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
-      <ColNames>idproject_sprint_table</ColNames>
+      <ColNames>project_sprint_table_id</ColNames>
       <Primary>1</Primary>
     </key>
     <foreign-key id="256" parent="231" name="idsprint">
-      <ColNames>idsprint</ColNames>
+      <ColNames>sprint_id</ColNames>
       <RefSchemaName>senior_project</RefSchemaName>
       <RefTableName>sprint</RefTableName>
-      <RefColNames>SprintID</RefColNames>
+      <RefColNames>sprint_id</RefColNames>
     </foreign-key>
     <foreign-key id="257" parent="231" name="idproject">
-      <ColNames>idproject</ColNames>
+      <ColNames>project_id</ColNames>
       <RefSchemaName>senior_project</RefSchemaName>
       <RefTableName>project</RefTableName>
-      <RefColNames>idProject</RefColNames>
+      <RefColNames>project_id</RefColNames>
     </foreign-key>
-    <column id="258" parent="232" name="idrequirements">
+    <column id="258" parent="232" name="requirements_id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
@@ -1060,27 +1061,27 @@
       <DataType>varchar(45)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="261" parent="232" name="iduser_stories">
+    <column id="261" parent="232" name="user_stories_id">
       <Position>4</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
     <index id="262" parent="232" name="idusreq_idx">
-      <ColNames>iduser_stories</ColNames>
+      <ColNames>user_stories_id</ColNames>
       <Type>btree</Type>
     </index>
     <key id="263" parent="232" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
-      <ColNames>idrequirements</ColNames>
+      <ColNames>requirements_id</ColNames>
       <Primary>1</Primary>
     </key>
     <foreign-key id="264" parent="232" name="idusreq">
-      <ColNames>iduser_stories</ColNames>
+      <ColNames>user_stories_id</ColNames>
       <RefSchemaName>senior_project</RefSchemaName>
       <RefTableName>user_stories</RefTableName>
-      <RefColNames>idUser_Stories</RefColNames>
+      <RefColNames>user_stories_id</RefColNames>
     </foreign-key>
-    <column id="265" parent="233" name="idrole">
+    <column id="265" parent="233" name="role_id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
@@ -1095,54 +1096,54 @@
     </column>
     <key id="267" parent="233" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
-      <ColNames>idrole</ColNames>
+      <ColNames>role_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="268" parent="234" name="idrole_user_table">
+    <column id="268" parent="234" name="role_user_table_id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="269" parent="234" name="idrole">
+    <column id="269" parent="234" name="role_id">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="270" parent="234" name="iduser">
+    <column id="270" parent="234" name="user_id">
       <Position>3</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
     <index id="271" parent="234" name="idrole_idx">
-      <ColNames>idrole</ColNames>
+      <ColNames>role_id</ColNames>
       <Type>btree</Type>
     </index>
     <index id="272" parent="234" name="iduser_idx">
-      <ColNames>iduser</ColNames>
+      <ColNames>user_id</ColNames>
       <Type>btree</Type>
     </index>
     <key id="273" parent="234" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
-      <ColNames>idrole_user_table</ColNames>
+      <ColNames>role_user_table_id</ColNames>
       <Primary>1</Primary>
     </key>
     <foreign-key id="274" parent="234" name="idrole">
-      <ColNames>idrole</ColNames>
+      <ColNames>role_id</ColNames>
       <RefSchemaName>senior_project</RefSchemaName>
       <RefTableName>role</RefTableName>
-      <RefColNames>idrole</RefColNames>
+      <RefColNames>role_id</RefColNames>
     </foreign-key>
     <foreign-key id="275" parent="234" name="iduser">
-      <ColNames>iduser</ColNames>
+      <ColNames>user_id</ColNames>
       <RefSchemaName>senior_project</RefSchemaName>
       <RefTableName>user</RefTableName>
-      <RefColNames>idUser</RefColNames>
+      <RefColNames>user_id</RefColNames>
     </foreign-key>
-    <column id="276" parent="235" name="SprintID">
+    <column id="276" parent="235" name="sprint_id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
@@ -1166,10 +1167,10 @@
     </column>
     <key id="280" parent="235" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
-      <ColNames>SprintID</ColNames>
+      <ColNames>sprint_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="281" parent="236" name="idteam">
+    <column id="281" parent="236" name="team_id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
@@ -1184,140 +1185,140 @@
     </column>
     <key id="283" parent="236" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
-      <ColNames>idteam</ColNames>
+      <ColNames>team_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="284" parent="237" name="idteam_project_table">
+    <column id="284" parent="237" name="team_project_table_id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="285" parent="237" name="idteam">
+    <column id="285" parent="237" name="team_id">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="286" parent="237" name="idproject">
+    <column id="286" parent="237" name="project_id">
       <Position>3</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
     <index id="287" parent="237" name="idteam_idx">
-      <ColNames>idteam</ColNames>
+      <ColNames>team_id</ColNames>
       <Type>btree</Type>
     </index>
     <index id="288" parent="237" name="idproject_idx">
-      <ColNames>idproject</ColNames>
+      <ColNames>project_id</ColNames>
       <Type>btree</Type>
     </index>
     <key id="289" parent="237" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
-      <ColNames>idteam_project_table</ColNames>
+      <ColNames>team_project_table_id</ColNames>
       <Primary>1</Primary>
     </key>
     <foreign-key id="290" parent="237" name="idteamproj">
-      <ColNames>idteam</ColNames>
+      <ColNames>team_id</ColNames>
       <RefSchemaName>senior_project</RefSchemaName>
       <RefTableName>team</RefTableName>
-      <RefColNames>idteam</RefColNames>
+      <RefColNames>team_id</RefColNames>
     </foreign-key>
     <foreign-key id="291" parent="237" name="idprojectteam">
-      <ColNames>idproject</ColNames>
+      <ColNames>project_id</ColNames>
       <RefSchemaName>senior_project</RefSchemaName>
       <RefTableName>project</RefTableName>
-      <RefColNames>idProject</RefColNames>
+      <RefColNames>project_id</RefColNames>
     </foreign-key>
-    <column id="292" parent="238" name="idteam_sprint_table">
+    <column id="292" parent="238" name="team_sprint_table_id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="293" parent="238" name="idsprint">
+    <column id="293" parent="238" name="sprint_id">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="294" parent="238" name="idteam">
+    <column id="294" parent="238" name="team_id">
       <Position>3</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
     <index id="295" parent="238" name="idsprintteam_idx">
-      <ColNames>idsprint</ColNames>
+      <ColNames>sprint_id</ColNames>
       <Type>btree</Type>
     </index>
     <index id="296" parent="238" name="idteamsprint_idx">
-      <ColNames>idteam</ColNames>
+      <ColNames>team_id</ColNames>
       <Type>btree</Type>
     </index>
     <key id="297" parent="238" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
-      <ColNames>idteam_sprint_table</ColNames>
+      <ColNames>team_sprint_table_id</ColNames>
       <Primary>1</Primary>
     </key>
     <foreign-key id="298" parent="238" name="idsprintteam">
-      <ColNames>idsprint</ColNames>
+      <ColNames>sprint_id</ColNames>
       <RefSchemaName>senior_project</RefSchemaName>
       <RefTableName>sprint</RefTableName>
-      <RefColNames>SprintID</RefColNames>
+      <RefColNames>sprint_id</RefColNames>
     </foreign-key>
     <foreign-key id="299" parent="238" name="idteamsprint">
-      <ColNames>idteam</ColNames>
+      <ColNames>team_id</ColNames>
       <RefSchemaName>senior_project</RefSchemaName>
       <RefTableName>team</RefTableName>
-      <RefColNames>idteam</RefColNames>
+      <RefColNames>team_id</RefColNames>
     </foreign-key>
-    <column id="300" parent="239" name="idteam_user_table">
+    <column id="300" parent="239" name="team_user_table_id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="301" parent="239" name="iduser">
+    <column id="301" parent="239" name="user_id">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="302" parent="239" name="idteam">
+    <column id="302" parent="239" name="team_id">
       <Position>3</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
     <index id="303" parent="239" name="iduserteam_idx">
-      <ColNames>iduser</ColNames>
+      <ColNames>user_id</ColNames>
       <Type>btree</Type>
     </index>
     <index id="304" parent="239" name="idteamuse_idx">
-      <ColNames>idteam</ColNames>
+      <ColNames>team_id</ColNames>
       <Type>btree</Type>
     </index>
     <key id="305" parent="239" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
-      <ColNames>idteam_user_table</ColNames>
+      <ColNames>team_user_table_id</ColNames>
       <Primary>1</Primary>
     </key>
     <foreign-key id="306" parent="239" name="iduserteam">
-      <ColNames>iduser</ColNames>
+      <ColNames>user_id</ColNames>
       <RefSchemaName>senior_project</RefSchemaName>
       <RefTableName>user</RefTableName>
-      <RefColNames>idUser</RefColNames>
+      <RefColNames>user_id</RefColNames>
     </foreign-key>
     <foreign-key id="307" parent="239" name="idteamuser">
-      <ColNames>idteam</ColNames>
+      <ColNames>team_id</ColNames>
       <RefSchemaName>senior_project</RefSchemaName>
       <RefTableName>team</RefTableName>
-      <RefColNames>idteam</RefColNames>
+      <RefColNames>team_id</RefColNames>
     </foreign-key>
-    <column id="308" parent="240" name="idto_do">
+    <column id="308" parent="240" name="to_do_id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
@@ -1334,27 +1335,27 @@
       <DataType>varchar(45)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="311" parent="240" name="iduser_stories">
+    <column id="311" parent="240" name="user_stories_id">
       <Position>4</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
     <index id="312" parent="240" name="idtdus_idx">
-      <ColNames>iduser_stories</ColNames>
+      <ColNames>user_stories_id</ColNames>
       <Type>btree</Type>
     </index>
     <key id="313" parent="240" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
-      <ColNames>idto_do</ColNames>
+      <ColNames>to_do_id</ColNames>
       <Primary>1</Primary>
     </key>
     <foreign-key id="314" parent="240" name="idtdus">
-      <ColNames>iduser_stories</ColNames>
+      <ColNames>user_stories_id</ColNames>
       <RefSchemaName>senior_project</RefSchemaName>
       <RefTableName>user_stories</RefTableName>
-      <RefColNames>idUser_Stories</RefColNames>
+      <RefColNames>user_stories_id</RefColNames>
     </foreign-key>
-    <column id="315" parent="241" name="idUser">
+    <column id="315" parent="241" name="user_id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
@@ -1381,10 +1382,10 @@
     </column>
     <key id="319" parent="241" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
-      <ColNames>idUser</ColNames>
+      <ColNames>user_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="320" parent="242" name="idUser_Stories">
+    <column id="320" parent="242" name="user_stories_id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
@@ -1419,136 +1420,136 @@
     </column>
     <key id="326" parent="242" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
-      <ColNames>idUser_Stories</ColNames>
+      <ColNames>user_stories_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="327" parent="243" name="iduser_stories_sprint_table">
+    <column id="327" parent="243" name="user_stories_sprint_table_id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="328" parent="243" name="iduser_stories">
+    <column id="328" parent="243" name="user_stories_id">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="329" parent="243" name="idsprint">
+    <column id="329" parent="243" name="sprint_id">
       <Position>3</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
     <index id="330" parent="243" name="user_stories_id_idx">
-      <ColNames>iduser_stories</ColNames>
+      <ColNames>user_stories_id</ColNames>
       <Type>btree</Type>
     </index>
     <index id="331" parent="243" name="idsprintus_idx">
-      <ColNames>idsprint</ColNames>
+      <ColNames>sprint_id</ColNames>
       <Type>btree</Type>
     </index>
     <key id="332" parent="243" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
-      <ColNames>iduser_stories_sprint_table</ColNames>
+      <ColNames>user_stories_sprint_table_id</ColNames>
       <Primary>1</Primary>
     </key>
     <foreign-key id="333" parent="243" name="user_stories_id">
-      <ColNames>iduser_stories</ColNames>
+      <ColNames>user_stories_id</ColNames>
       <RefSchemaName>senior_project</RefSchemaName>
       <RefTableName>user_stories</RefTableName>
-      <RefColNames>idUser_Stories</RefColNames>
+      <RefColNames>user_stories_id</RefColNames>
     </foreign-key>
     <foreign-key id="334" parent="243" name="idsprintus">
-      <ColNames>idsprint</ColNames>
+      <ColNames>sprint_id</ColNames>
       <RefSchemaName>senior_project</RefSchemaName>
       <RefTableName>sprint</RefTableName>
-      <RefColNames>SprintID</RefColNames>
+      <RefColNames>sprint_id</RefColNames>
     </foreign-key>
-    <column id="335" parent="244" name="iduser_user_stories_table">
+    <column id="335" parent="244" name="user_user_stories_table_id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="336" parent="244" name="iduser">
+    <column id="336" parent="244" name="user_id">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="337" parent="244" name="iduser_stories">
+    <column id="337" parent="244" name="user_stories_id">
       <Position>3</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
     <index id="338" parent="244" name="iduserus_idx">
-      <ColNames>iduser</ColNames>
+      <ColNames>user_id</ColNames>
       <Type>btree</Type>
     </index>
     <index id="339" parent="244" name="iduser_storiesuser_idx">
-      <ColNames>iduser_stories</ColNames>
+      <ColNames>user_stories_id</ColNames>
       <Type>btree</Type>
     </index>
     <key id="340" parent="244" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
-      <ColNames>iduser_user_stories_table</ColNames>
+      <ColNames>user_user_stories_table_id</ColNames>
       <Primary>1</Primary>
     </key>
     <foreign-key id="341" parent="244" name="iduserus">
-      <ColNames>iduser</ColNames>
+      <ColNames>user_id</ColNames>
       <RefSchemaName>senior_project</RefSchemaName>
       <RefTableName>user</RefTableName>
-      <RefColNames>idUser</RefColNames>
+      <RefColNames>user_id</RefColNames>
     </foreign-key>
     <foreign-key id="342" parent="244" name="iduser_storiesuser">
-      <ColNames>iduser_stories</ColNames>
+      <ColNames>user_stories_id</ColNames>
       <RefSchemaName>senior_project</RefSchemaName>
       <RefTableName>user_stories</RefTableName>
-      <RefColNames>idUser_Stories</RefColNames>
+      <RefColNames>user_stories_id</RefColNames>
     </foreign-key>
-    <column id="343" parent="245" name="idworks_on">
+    <column id="343" parent="245" name="works_on_id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="344" parent="245" name="iduser">
+    <column id="344" parent="245" name="user_id">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="345" parent="245" name="iduser_stories">
+    <column id="345" parent="245" name="user_stories_id">
       <Position>3</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
     <index id="346" parent="245" name="iduserustories_idx">
-      <ColNames>iduser</ColNames>
+      <ColNames>user_id</ColNames>
       <Type>btree</Type>
     </index>
     <index id="347" parent="245" name="idususer_idx">
-      <ColNames>iduser_stories</ColNames>
+      <ColNames>user_stories_id</ColNames>
       <Type>btree</Type>
     </index>
     <key id="348" parent="245" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
-      <ColNames>idworks_on</ColNames>
+      <ColNames>works_on_id</ColNames>
       <Primary>1</Primary>
     </key>
     <foreign-key id="349" parent="245" name="iduserustories">
-      <ColNames>iduser</ColNames>
+      <ColNames>user_id</ColNames>
       <RefSchemaName>senior_project</RefSchemaName>
       <RefTableName>user</RefTableName>
-      <RefColNames>idUser</RefColNames>
+      <RefColNames>user_id</RefColNames>
     </foreign-key>
     <foreign-key id="350" parent="245" name="idususer">
-      <ColNames>iduser_stories</ColNames>
+      <ColNames>user_stories_id</ColNames>
       <RefSchemaName>senior_project</RefSchemaName>
       <RefTableName>user_stories</RefTableName>
-      <RefColNames>idUser_Stories</RefColNames>
+      <RefColNames>user_stories_id</RefColNames>
     </foreign-key>
   </database-model>
 </dataSource>
