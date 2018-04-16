@@ -151,19 +151,41 @@ def delete_card(user_stories_id):
     db.engine.ececute("delete * from works_on where works_on.user_stories_id = " + user_stories_id)
     db.engine.ececute("delete * from requirements where requirements.user_stories_id = " + user_stories_id)
 
-#@app.route('/team/<ProjName>')
-#@login_required
-#def team_endpoint(ProjName):
+
+@app.route('/team/<project_id>')
+@login_required
+def team_endpoint(project_id):
   
- #   members = db.engine.execute("select username from user join team_user_table on (user.iduser = team_user_table.iduser) "
- #                               "join team on (team_user_table.idteam = team.idteam) join team_project_table on (team.idteam = team_project_table.idteam) "
-  #                              "join project on (team_project_table.idproject = project.idproject) where project.ProjName = '{ProjName}'".format(ProjName=ProjName))
+    members = db.engine.execute("select user.user_id from user join team_user_table on (user.user_id = team_user_table.user_id) "
+                                "join team on (team_user_table.team_id = team.team_id) join team_project_table on (team.team_id = team_project_table.team_id) "
+                                "join project on (team_project_table.project_id = project.project_id) where project.project_id = "+project_id)
   
-   # teamnames = []
-    #for teamname in members:
-     #   teamnames.append(teamname[0])
-   
-    #return render_template('team.html', teamnames=teamnames)
+    member_ids = []
+    for id in members:
+        member_ids.append(id[0])
+
+    return render_template('team.html', member_ids=member_ids, getUsername=getUsername, getEmail=getEmail)
+
+
+def getUsername(user_id):
+    username = db.engine.execute("select username from user where user.user_id = "+user_id)
+
+    name = []
+    for user in username:
+        name.append(user[0])
+
+    return name[0]
+
+
+def getEmail(user_id):
+    email = db.engine.execute("select email from user where user.user_id = "+user_id)
+
+    user_email = []
+    for e in email:
+        user_email.append(e[0])
+
+    return user_email[0]
+
 
 @app.route('/sprintmanage/<project_id>')
 @login_required
@@ -219,7 +241,7 @@ def sprint_endpoint(idsprint, project_id):
     for prodback in pb:
         prodBackIds.append(prodback[0])
 
-    return render_template('Sprint.html', todo=todo, inprogress=inprogress, done=done, prodBackIds=prodBackIds, getTitle=getTitle, getDifficulty=getDifficulty)
+    return render_template('Sprint.html', project_id=project_id, todo=todo, inprogress=inprogress, done=done, prodBackIds=prodBackIds, getTitle=getTitle, getDifficulty=getDifficulty)
 
 
 def getTitle(id:int):
