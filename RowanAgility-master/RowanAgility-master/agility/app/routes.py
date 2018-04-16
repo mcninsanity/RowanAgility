@@ -244,9 +244,8 @@ def sprint_endpoint(idsprint, project_id):
     for dn_us in done_us:
         done.append(dn_us[0])
 
-    pb = db.engine.execute(
-        "select user_stories_id from user_stories_sprint_table where user_stories_sprint_table.sprint_id in "
-        "(select sprint_id from project_sprint_table where project_sprint_table.project_id = " + project_id + ")")
+    pb = db.engine.execute("select user_stories_id from user_stories_sprint_table where user_stories_sprint_table.sprint_id in "
+                           "(select sprint_id from project_sprint_table where project_sprint_table.project_id = " + project_id + ")")
 
     prodBackIds = []
     for prodback in pb:
