@@ -22,6 +22,7 @@ def index():
         project_ids.append(pid[0])
     return render_template('index.html', title='Home', project_ids=project_ids, getProjName=getProjName)
 
+
 def getProjName(project_id :int):
     projName = db.engine.execute("select project.ProjName from project where project.project_id = "+project_id)
 
@@ -132,11 +133,24 @@ def CreateProject():
         return redirect(url_for('index'))
     return render_template('CreateProject.html', title='Create Project', form=form, team_names=team_names)
 
-@app.route('/createsprint')
+
+@app.route('/createsprint')  # not finished. Im not sure what to do here. DO we need a Sprint Model?
 @login_required
 def create_sprint_endpoint():
     form = SprintForm()
     return render_template('createSprint.html', form=form)
+
+
+@app.route('/deletecard')  # Pop up with warning and confirmation
+def delete_card(user_stories_id):
+
+    db.engine.ececute("delete * from user_stories where user_stories.user_stories_id = "+user_stories_id)
+    db.engine.ececute("delete * from user_stories_sprint_table where user_stories_sprint_table.user_stories_id = " + user_stories_id)
+    db.engine.ececute("delete * from user_user_stories_table where user_user_stories_table.user_stories_id = " + user_stories_id)
+    db.engine.ececute("delete * from to_do where to_do.user_stories_id = " + user_stories_id)
+    db.engine.ececute("delete * from works_on where works_on.user_stories_id = " + user_stories_id)
+    db.engine.ececute("delete * from requirements where requirements.user_stories_id = " + user_stories_id)
+
 #@app.route('/team/<ProjName>')
 #@login_required
 #def team_endpoint(ProjName):
@@ -169,11 +183,11 @@ def sprint_manage_endpoint(project_id):
     for prodback in pb:
         prodBackIds.append(prodback[0])
 
-    return render_template('sprintManagement.html', sprintids=sprintids, prodBackIds=prodBackIds, myfunction=getTitle, getDifficulty=getDifficulty)
+    return render_template('sprintManagement.html', sprintids=sprintids, prodBackIds=prodBackIds, myfunction=getTitle, getDifficulty=getDifficulty, project_id=project_id)
 
-@app.route('/sprint/<idsprint>')
+@app.route('/sprint/<idsprint>/<project_id>')
 @login_required
-def sprint_endpoint(idsprint):
+def sprint_endpoint(idsprint, project_id):
 
     todo_us = db.engine.execute("select user_stories.user_stories_id from user_stories join user_stories_sprint_table on "
                                 "(user_stories.user_stories_id = user_stories_sprint_table.user_stories_id) "
@@ -197,7 +211,15 @@ def sprint_endpoint(idsprint):
     for dn_us in done_us:
         done.append(dn_us[0])
 
-    return render_template('Sprint.html', todo=todo, inprogress=inprogress, done=done)
+    pb = db.engine.execute(
+        "select user_stories_id from user_stories_sprint_table where user_stories_sprint_table.sprint_id in "
+        "(select sprint_id from project_sprint_table where project_sprint_table.project_id = " + project_id + ")")
+
+    prodBackIds = []
+    for prodback in pb:
+        prodBackIds.append(prodback[0])
+
+    return render_template('Sprint.html', todo=todo, inprogress=inprogress, done=done, prodBackIds=prodBackIds, getTitle=getTitle, getDifficulty=getDifficulty)
 
 
 def getTitle(id:int):
