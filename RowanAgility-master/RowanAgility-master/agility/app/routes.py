@@ -258,6 +258,7 @@ def sprint_endpoint(idsprint, project_id):
 def getCurrentSprint(project_id):
     curr_sprint = db.engine.execute("select sprint_id from sprint join ")
 
+
 def getTitle(id:int):
     userstorytitle = db.engine.execute("select title from user_stories where user_stories.user_stories_id = "+id)
 
@@ -274,6 +275,24 @@ def getDifficulty(id:int):
     for d in diff:
         difficulty.append(d[0])
     return str(difficulty[0])
+
+
+def getDescription(id:int):
+    descrip = db.engine.execute("select description from user_stories where user_stories.user_stories_id = "+id)
+
+    description = []
+    for desc in descrip:
+        description.append(desc[0])
+    return description[0]
+
+
+def getAcceptanceCriteria(id:int):
+    accept = db.engine.ececute("select acceptance_criteria from user_stories where user_stories.user_stories_id = "+id)
+
+    acceptance = []
+    for acc in accept:
+        acceptance.append(accept[0])
+    return acceptance[0]
 
 
 
