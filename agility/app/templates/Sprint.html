@@ -20,6 +20,23 @@
     <link type="text/css" rel="stylesheet" href="../static/css/style.css">
 
     <title>Sprint Page</title>
+
+    <script>
+    function allowDrop(ev) {
+        ev.preventDefault();
+    }
+
+    function drag(ev) {
+        ev.dataTransfer.setData("text", ev.target.id);
+    }
+
+    function drop(ev, el) {
+        ev.preventDefault();
+        var data = ev.dataTransfer.getData("text");
+        el.appendChild(document.getElementById(data));
+    }
+    </script>
+
 </head>
 <body>
 
@@ -56,13 +73,13 @@
     </div>
 </div>
 
-<div class="card-list">
 
+<div id="div1" class="card-list" ondrop="drop(event, this)" ondragover="allowDrop(event)">
     <div id="CardListTitle">
         Product Backlog
     </div>
 
-    <div class="card">
+    <div id="drag1" class="card" draggable="true" ondragstart="drag(event)" ondrop="return false" ondragover="return false">
         <div class="card-body">
             <h5 class="card-title">PBI 1</h5>
             <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
@@ -77,12 +94,12 @@
 </div>
 
 <div class="container">
-<div class="todo-card-list">
+<div id="div2" class="todo-card-list" ondrop="drop(event, this)" ondragover="allowDrop(event)">
     <div class="sub-card-list-title">
         To Do
     </div>
 
-        <div class="card">
+        <div id="drag2" class="card" draggable="true" ondragstart="drag(event)" ondrop="return false" ondragover="return false">
         <div class="card-body">
             <h5 class="card-title">PBI 1</h5>
             <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
@@ -98,12 +115,12 @@
 </div>
 
 <div class="container">
-<div class="inprogress-card-list">
+<div id="div3" class="inprogress-card-list" ondrop="drop(event, this)" ondragover="allowDrop(event)">
     <div class="sub-card-list-title">
         In Progress
     </div>
 
-        <div class="card">
+        <div id="drag3" class="card" draggable="true" ondragstart="drag(event)" ondrop="return false" ondragover="return false">
         <div class="card-body">
             <h5 class="card-title">PBI 1</h5>
             <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
@@ -119,12 +136,12 @@
 </div>
 
 <div class="container">
-<div class="done-card-list">
+<div id="div4" class="done-card-list" ondrop="drop(event, this)" ondragover="allowDrop(event)">
     <div class="sub-card-list-title">
         Done
     </div>
 
-        <div class="card">
+        <div id="drag4" class="card" draggable="true" ondragstart="drag(event)" ondrop="return false" ondragover="return false">
         <div class="card-body">
             <h5 class="card-title">PBI 1</h5>
             <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
