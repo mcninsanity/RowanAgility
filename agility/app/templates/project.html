@@ -1,74 +1,86 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>{{ ProjName }}</title>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <style>
 
-    /* Create 2 unequal columns that floats next to each other */
-.column {
-    float: left;
-    padding: 10px;
-}
-/* Create left column that takes up 30% of the screen
-.column.left {
-    width: 30%;
-}
+    <!-- Bootstrap CSS -->
+    <link type="text/css" rel="stylesheet" href="../static/css/bootstrap.css">
 
-/* Create right column that takes up 70% of the screen.
-.column.right {
-    width: 70%;
-}
+    <!-- Bootstrap Grid CSS -->
+    <link type="text/css" rel="stylesheet" href="../static/css/bootstrap-grid.css">
 
-/* Clear floats after the columns */
-.row:after {
-    content: "";
-    display: table;
-    clear: both;
-}
+    <!-- Bootstrap Reboot CSS -->
+    <link type="text/css" rel="stylesheet" href="../static/css/bootstrap-reboot.css">
 
-/* Responsive layout - makes the three columns stack on top of each other instead of next to each other on smaller screens (600px wide or less) */
-@media (max-width: 600px) {
-    .column {
-        width: 100%;
-    }
-}
-    </style>
+    <!-- Style Sheet CSS -->
+    <link type="text/css" rel="stylesheet" href="../static/css/style.css">
 
+    <!-- Hover CSS -->
+    <link type="text/css" rel="stylesheet" href="../static/css/hover-min.css">
+
+    <!-- Plotly -->
+    <script src="../static/js/plotly-latest.min.js"></script>
+
+
+    <title>Project Page</title>
 </head>
 <body>
 
-<div class="w3-bar w3-blue">
-  <a href="#" class="w3-bar-item w3-button w3-hover-blue w3-mobile w3-light-blue w3-ripple w3-border w3-border-black" style="width:33%">Back</a>
-  <a href="/index" class="w3-bar-item w3-button w3-hover-blue w3-mobile w3-light-blue w3-ripple w3-border w3-border-black" style="width:34%">Home</a>
-  <a href="/logout" class="w3-bar-item w3-button w3-hover-blue w3-mobile w3-light-blue w3-ripple w3-border w3-border-black" style="width:33%">Sign out</a>
-</div>
 
-<h1 style="text-align:center; font-size:300%">{{ProjName}}</h1>
-
-<div class="row">
-    <div class="column left">
-        <a href="/SprintManagement" style="width:100%" class="w3-btn w3-hover-blue w3-ripple w3-light-blue w3-border w3-border-black w3-round" value="Sprint Management"></a>
-        <br></br>
-        <input type="button" style="width:100%" class="w3-btn w3-hover-blue w3-ripple w3-light-blue w3-border w3-border-black w3-round" value="Current Sprint">
-        <br></br>
-        <a href="https://www.github.com" style="width:100%" class="w3-btn w3-hover-blue w3-ripple w3-light-blue w3-border w3-border-black w3-round">Project Github
-        </a>
-        <br></br>
-        <input type="button" style="width:100%" class="w3-btn w3-hover-blue w3-ripple w3-light-blue w3-border w3-border-black w3-round" value="Team Page">
-    </div>
-
-    <div class="column right">
-        <div id="myDiv" style="width:100%;"></div>
-    </div>
+<h1>{{ProjName}}</h1>
+<p id="summary">Project Summary</p>
+<div class="center">
+    <button href="#" class="popup-modal"
+                    data-toggle="modal" data-target="#DoD">Definition of Done</button>
 </div>
 
 
 
+<!-- Creates two columns with Project management buttons and burnup chart -->
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <!-- Project Management Buttons -->
+            <a href="/sprintmanage/{{ project_id }}" class="button project-page-button hvr-shrink">Sprint Management</a>
+            <a href="#" class="button project-page-button hvr-shrink">Current Sprint</a>
+            <a href="https://www.github.com" class="button project-page-button hvr-shrink">Project Github</a>
+            <a href="#" class="button project-page-button hvr-shrink">Team Page</a>
+        </div>
+        <div class="col-8">
+            <!-- Burnup Chart -->
+            <div id="burnup" style="width:100%;"></div>
+        </div>
+    </div>
+</div>
 
+<!-- Definition of Done Modal -->
+<div class="modal fade" id="DoD" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="DoD title">Definition of Done</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <textarea class="form-control" id="message-text" style="height:500px"></textarea>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../static/js/jquery-3.3.1.js"></script>
+<script src="../static/js/popper.js"></script>
+<script src="../static/js/bootstrap.js"></script>
+
+
+<!-- Creates Burnup Chart -->
 <script>
 
 var sprints = {{ sprints }}
@@ -103,10 +115,7 @@ var layout = {
 
 var data = [trace0, trace1];
 
-Plotly.newPlot('myDiv', data, layout);
+Plotly.newPlot('burnup', data, layout);
 </script>
-
-
-
 </body>
 </html>

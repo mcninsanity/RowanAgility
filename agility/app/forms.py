@@ -22,7 +22,7 @@ class User_StoriesForm(FlaskForm):
     Description = StringField('Descriprion')
     Github_link = StringField('Github_link')
 
-class Sprint(FlaskForm):
+class SprintForm(FlaskForm):
     end_date = DateField('end_date')
     Start_date = DateField('Start_date')
     Sprint_num = StringField('Sprint_num')

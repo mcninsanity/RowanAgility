@@ -28,13 +28,15 @@
 </nav>
 
 <h1>Team Page</h1>
-{% for p in teamnames %}
 <div class ="center"><p>Project Members</p></div>
-<div class ="container member-info">
-    <p>Name: {{p}}</p>
-    <p>Role:</p>
-    <p>E-mail:</p>
-{% endfor %}
-</div>
+
+    {% for p in member_ids %}
+	<div class ="container member-info">
+    		<p>Name: {{ getUsername(p|string) }}</p>
+    		<p>Email: {{ getEmail(p|string) }}</p>
+    		<p>Role: N/A</p>
+	</div>
+    {% endfor %}
+
 </body>
 </html>
