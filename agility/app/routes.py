@@ -80,28 +80,31 @@ def register():
 @app.route('/project/<ProjName>')
 @login_required
 def project_endpoint(ProjName):
-    sprints = db.engine.execute("select Sprint_num from sprint join project_sprint_table on"
+    sprints_num = db.engine.execute("select Sprint_num from sprint join project_sprint_table on"
                                  " (sprint.sprint_id = project_sprint_table.sprint_id) join project on"
                                  " (project_sprint_table.project_id = project.project_id)"
-                                 "where project.ProjName = " + ProjName)
+                                 "where project.ProjName = '" + ProjName + "'")
     big = db.engine.execute("select SUM(Difficulty) from user_stories join user_stories_sprint_table on"
-                            " (user_stories.user_id_Stories = user_stories_sprint_table.user_id_Stories) join sprint on"
+                            " (user_stories.user_stories_id = user_stories_sprint_table.user_stories_id) join sprint on"
                             " (user_stories_sprint_table.sprint_id = sprint.sprint_id) join project_sprint_table on"
                             " (sprint.sprint_id = project_sprint_table.sprint_id) join project on"
                             " (project_sprint_table.project_id = project.project_id)"
-                            "where project.ProjName = " + ProjName)
+                            "where project.ProjName = '" + ProjName + "'").scalar()
     completeDiff = []
     totalDiff = []
-    for num in sprints:
-        completeDiff.append(big)
-        totalDiff.append(db.engine.execute("select SUM(Difficulty) from user_stories join user_stories_sprint_table on"
-                            " (user_stories.user_id_Stories = user_stories_sprint_table.user_id_Stories) join sprint on"
+    sprints = []
+    for num in sprints_num:
+        sprints.append(num[0])
+        totalDiff.append(big)
+        completeDiff.append(db.engine.execute("select SUM(Difficulty) from user_stories join user_stories_sprint_table on"
+                            " (user_stories.user_stories_id = user_stories_sprint_table.user_stories_id) join sprint on"
                             " (user_stories_sprint_table.sprint_id = sprint.sprint_id) join project_sprint_table on"
                             " (sprint.sprint_id = project_sprint_table.sprint_id) join project on"
                             " (project_sprint_table.project_id = project.project_id)"
-                            "where project.ProjName = " + ProjName + " and sprint.sprint_num = " + num))
+                            "where project.ProjName = '" + ProjName + "' and sprint.sprint_num = '" + str(num[0]) + "'").scalar())
     #totalDiff = [50, 65, 80, 70]
     #completeDiff = [0, 20, 33, 55]
+    #sprints = [1, 2, 3, 4]
     return render_template('project.html', ProjName=ProjName, sprints=sprints, totalDiff=totalDiff, completeDiff=completeDiff)
 
 
