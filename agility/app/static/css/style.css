@@ -3,7 +3,7 @@ body {
     background-attachment: fixed;
     background-size: 100%;
 }
-/*
+
 @font-face {
    font-family: agilityFont;
    src: url(quotus-bold.ttf);
@@ -12,10 +12,10 @@ body {
 * {
     font-family: agilityFont;
 }
-*/
+
 
 h1 {
-    /*font-family: agilityFont;*/
+    font-family: agilityFont;
     color: blue;
     font-size: 50px;
     text-align: center;
@@ -25,9 +25,14 @@ h1 {
     text-align: center;
 }
 
-
+.left {
+    text-align: left;
+}
 
 .login-container {
+    position: absolute;
+    top: 25%;
+    left: 25%;
     background-color: #d0d0d0;
     text-align: center;
     width: 50%;
@@ -116,6 +121,10 @@ h1 {
     width: 50%
 }
 
+.sign-in {
+    top: 50%;
+}
+
 .card-list {
     position: fixed;
     width: 20%;
@@ -201,4 +210,6 @@ h1 {
     top: 50%;
     right: 0px;
 }
+
+
 
