@@ -61,78 +61,19 @@
     <div id="CardListTitle">
         Product Backlog
     </div>
-
+    {%  for p in prodBackIds %}
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title">PBI 1</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <h5 class="card-title">{{ getTitle(p|string) }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{ getDifficulty(p|string) }}</h6>
             <div class="center">
                 <button href="#" class="popup-modal"
                         data-toggle="modal" data-target="#CardDetails">View/Edit Card Details</button>
             </div>
         </div>
     </div>
+     {% endfor %}
 
-    <div class="card">
-        <div class="card-body">
-            <h5 class="card-title">PBI 2</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <div class="center">
-                <button href="#" class="popup-modal"
-                        data-toggle="modal" data-target="#CardDetails">View/Edit Card Details</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-body">
-            <h5 class="card-title">PBI 3</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <div class="center">
-                <button href="#" class="popup-modal"
-                        data-toggle="modal" data-target="#CardDetails">View/Edit Card Details</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-body">
-            <h5 class="card-title">PBI 4</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <div class="center">
-                <button href="#" class="popup-modal"
-                        data-toggle="modal" data-target="#CardDetails">View/Edit Card Details</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-body">
-            <h5 class="card-title">PBI 5</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <div class="center">
-                <button href="#" class="popup-modal"
-                        data-toggle="modal" data-target="#CardDetails">View/Edit Card Details</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-body">
-            <h5 class="card-title">PBI 6</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <div class="center">
-                <button href="#" class="popup-modal"
-                        data-toggle="modal" data-target="#CardDetails">View/Edit Card Details</button>
-            </div>
-        </div>
-    </div>
 
 </div>
 
@@ -141,19 +82,18 @@
     <div class="sub-card-list-title">
         To Do
     </div>
-
+        {% for t in todo %}
         <div class="card">
         <div class="card-body">
-            <h5 class="card-title">PBI 1</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <h5 class="card-title">{{ getTitle(t|string) }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{ getDifficulty(t|string) }}</h6>
             <div class="center">
                 <button href="#" class="popup-modal"
                         data-toggle="modal" data-target="#CardDetails">View/Edit Card Details</button>
             </div>
         </div>
     </div>
-
+    {% endfor %}
 </div>
 </div>
 
@@ -162,10 +102,10 @@
     <div class="sub-card-list-title">
         In Progress
     </div>
-
+        {% for i in inprogress %}
         <div class="card">
         <div class="card-body">
-            <h5 class="card-title">PBI 1</h5>
+            <h5 class="card-title">{{ getTitle(i|string) }}</h5>
             <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
             <div class="center">
@@ -174,7 +114,7 @@
             </div>
         </div>
     </div>
-
+    {% endfor %}
 </div>
 </div>
 
@@ -183,11 +123,11 @@
     <div class="sub-card-list-title">
         Done
     </div>
-
+        {% for d in done %}
         <div class="card">
         <div class="card-body">
-            <h5 class="card-title">PBI 1</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+            <h5 class="card-title">{{ getTitle(d|string) }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{ getDifficulty(d|string) }}</h6>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
             <div class="center">
                 <button href="#" class="popup-modal"
@@ -195,7 +135,7 @@
             </div>
         </div>
     </div>
-
+    {%  endfor %}
 </div>
 </div>
 
