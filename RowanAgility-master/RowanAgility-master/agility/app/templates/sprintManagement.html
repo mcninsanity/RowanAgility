@@ -70,7 +70,7 @@
 
 <div class="sprint-management-scrollbox">
     {%  for s in sprintids %}
-    <a href="/sprint/{{ s }}/{{ project_id }}" class="button sprint-management-button hvr-shrink">{{ s }}</a>
+    <a href="/sprint/{{ s }}/{{ project_id }}" class="button sprint-management-button hvr-shrink">{{ getSprintNum(s|string) }}</a>
     {%  endfor %}
 
 </div>
