@@ -205,7 +205,18 @@ def sprint_manage_endpoint(project_id):
     for prodback in pb:
         prodBackIds.append(prodback[0])
 
-    return render_template('sprintManagement.html', sprintids=sprintids, prodBackIds=prodBackIds, myfunction=getTitle, getDifficulty=getDifficulty, project_id=project_id)
+    return render_template('sprintManagement.html', getSprintNum=getSprintNum, sprintids=sprintids, prodBackIds=prodBackIds, myfunction=getTitle, getDifficulty=getDifficulty, project_id=project_id)
+
+
+def getSprintNum(sprint_id):
+    sprint_num = db.engine.execute("select sprint_num from sprint where sprint_id = "+sprint_id)
+
+    sprint = []
+    for s in sprint_num:
+        sprint.append(s[0])
+
+    return sprint[0]
+
 
 @app.route('/sprint/<idsprint>/<project_id>')
 @login_required
@@ -217,7 +228,7 @@ def sprint_endpoint(idsprint, project_id):
 
     todo = []
     for user_story in todo_us:
-        todo.append(us[0])
+        todo.append(user_story[0])
 
     inprogress_us = db.engine.execute("select user_stories.user_stories_id from user_stories join user_stories_sprint_table on (user_stories.user_stories_id = user_stories_sprint_table.user_stories_id) "
                                       "where user_stories_sprint_table.sprint_id = "+idsprint+" and user_stories.status = 'In Progress'")
@@ -243,6 +254,9 @@ def sprint_endpoint(idsprint, project_id):
 
     return render_template('Sprint.html', project_id=project_id, todo=todo, inprogress=inprogress, done=done, prodBackIds=prodBackIds, getTitle=getTitle, getDifficulty=getDifficulty)
 
+
+def getCurrentSprint(project_id):
+    curr_sprint = db.engine.execute("select sprint_id from sprint join ")
 
 def getTitle(id:int):
     userstorytitle = db.engine.execute("select title from user_stories where user_stories.user_stories_id = "+id)
