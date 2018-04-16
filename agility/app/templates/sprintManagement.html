@@ -54,7 +54,7 @@
         Product Backlog
     </div>
 
-    <div class="card">
+    <div class="card" draggable="true">
         <div class="card-body">
             <h5 class="card-title">PBI 1</h5>
             <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
@@ -135,18 +135,38 @@
 
 <!-- Card Details Modal -->
 <div class="modal fade" id="CardDetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="CardDetails title">Card Details</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <textarea class="form-control" id="message-text" style="height:500px"></textarea>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <!-- Header w/ Card Title -->
+        <div class="modal-header">
+            <textarea class="form-control" id="message-text" placeholder="Enter Card Title" style="height:50px"></textarea>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <!-- Body w/ Difficulty, Description, Acceptance Criteria -->
+        <div class="container">
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Difficulty:</span>
+                </div>
+                <input type="number" class="form-control" aria-label="With textarea" placeholder="Enter Difficulty"></input>
+            </div>
+            <!-- 2 columns w/ Description and Acceptance Criteria -->
+            <div class="row">
+                <div class="col">
+                    <h5 class="modal-title" id="CardDetails title">Description</h5>
+                    <textarea class="form-control" id="message-text" placeholder="Enter Description" style="height:500px"></textarea>
+                </div>
+                <div class="col">
+                    <h5 class="modal-title" id="CardDetails title">Acceptance Criteria</h5>
+                    <textarea class="form-control" id="message-text" placeholder="Enter Acceptance Criteria" style="height:500px"></textarea>
+                </div>
+            </div>
+        </div>
+        <!-- Footer w/ "Save Changes" button -->
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
