@@ -32,8 +32,8 @@
 
     {% for p in member_ids %}
 	<div class ="container member-info">
-    		<p>Name: {{ getUsername(p|string) }}</p>
-    		<p>Email: {{ getEmail(p|string) }}</p>
+    		<p>Name: {{ get_username(p|string) }}</p>
+    		<p>Email: {{ get_email(p|string) }}</p>
     		<p>Role: N/A</p>
 	</div>
     {% endfor %}

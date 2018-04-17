@@ -44,10 +44,10 @@
     <div class="row">
         <div class="col">
             <!-- Project Management Buttons -->
-            <a href="/sprintmanage/{{ project_id }}" class="button project-page-button hvr-shrink">Sprint Management</a>
-            <a href="#" class="button project-page-button hvr-shrink">Current Sprint</a>
+            <a href="/sprint_manage/{{project_id}}" class="button project-page-button hvr-shrink">Sprint Management</a>
+            <a href="/sprint/{{currentSprint(project_id)}}/{{project_id}}" class="button project-page-button hvr-shrink">Current Sprint</a>
             <a href="https://www.github.com" class="button project-page-button hvr-shrink">Project Github</a>
-            <a href="#" class="button project-page-button hvr-shrink">Team Page</a>
+            <a href="/team/{{project_id}}" class="button project-page-button hvr-shrink">Team Page</a>
         </div>
         <div class="col-8">
             <!-- Burnup Chart -->

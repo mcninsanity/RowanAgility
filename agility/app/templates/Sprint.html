@@ -20,6 +20,23 @@
     <link type="text/css" rel="stylesheet" href="../static/css/style.css">
 
     <title>Sprint Page</title>
+
+    <script>
+    function allowDrop(ev) {
+        ev.preventDefault();
+    }
+
+    function drag(ev) {
+        ev.dataTransfer.setData("text", ev.target.id);
+    }
+
+    function drop(ev, el) {
+        ev.preventDefault();
+        var data = ev.dataTransfer.getData("text");
+        el.appendChild(document.getElementById(data));
+    }
+    </script>
+
 </head>
 <body>
 
@@ -56,56 +73,14 @@
     </div>
 </div>
 
-<div class="card-list">
-
+<div id="div1" class="card-list" ondrop="drop(event, this)" ondragover="allowDrop(event)">
     <div id="CardListTitle">
         Product Backlog
     </div>
-    {%  for p in prodBackIds %}
-    <div class="card">
+
+    <div id="drag1" class="card" draggable="true" ondragstart="drag(event)" ondrop="return false" ondragover="return false">
         <div class="card-body">
-            <h5 class="card-title">{{ getTitle(p|string) }}</h5>
-            <h6 class="card-subtitle mb-2 text-muted">{{ getDifficulty(p|string) }}</h6>
-            <div class="center">
-                <button href="#" class="popup-modal"
-                        data-toggle="modal" data-target="#CardDetails">View/Edit Card Details</button>
-            </div>
-        </div>
-    </div>
-     {% endfor %}
-
-
-</div>
-
-<div class="container">
-<div class="todo-card-list">
-    <div class="sub-card-list-title">
-        To Do
-    </div>
-        {% for t in todo %}
-        <div class="card">
-        <div class="card-body">
-            <h5 class="card-title">{{ getTitle(t|string) }}</h5>
-            <h6 class="card-subtitle mb-2 text-muted">{{ getDifficulty(t|string) }}</h6>
-            <div class="center">
-                <button href="#" class="popup-modal"
-                        data-toggle="modal" data-target="#CardDetails">View/Edit Card Details</button>
-            </div>
-        </div>
-    </div>
-    {% endfor %}
-</div>
-</div>
-
-<div class="container">
-<div class="inprogress-card-list">
-    <div class="sub-card-list-title">
-        In Progress
-    </div>
-        {% for i in inprogress %}
-        <div class="card">
-        <div class="card-body">
-            <h5 class="card-title">{{ getTitle(i|string) }}</h5>
+            <h5 class="card-title">PBI 1</h5>
             <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
             <div class="center">
@@ -114,20 +89,20 @@
             </div>
         </div>
     </div>
-    {% endfor %}
-</div>
+
 </div>
 
 <div class="container">
-<div class="done-card-list">
+<div class="container">
+<div id="div2" class="todo-card-list" ondrop="drop(event, this)" ondragover="allowDrop(event)">
     <div class="sub-card-list-title">
-        Done
+        To Do
     </div>
-        {% for d in done %}
-        <div class="card">
+
+        <div id="drag2" class="card" draggable="true" ondragstart="drag(event)" ondrop="return false" ondragover="return false">
         <div class="card-body">
-            <h5 class="card-title">{{ getTitle(d|string) }}</h5>
-            <h6 class="card-subtitle mb-2 text-muted">{{ getDifficulty(d|string) }}</h6>
+            <h5 class="card-title">PBI 1</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
             <div class="center">
                 <button href="#" class="popup-modal"
@@ -135,24 +110,88 @@
             </div>
         </div>
     </div>
-    {%  endfor %}
+
 </div>
+</div>
+
+<div class="container">
+<div id="div3" class="inprogress-card-list" ondrop="drop(event, this)" ondragover="allowDrop(event)">
+    <div class="sub-card-list-title">
+        In Progress
+    </div>
+
+        <div id="drag3" class="card" draggable="true" ondragstart="drag(event)" ondrop="return false" ondragover="return false">
+        <div class="card-body">
+            <h5 class="card-title">PBI 1</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <div class="center">
+                <button href="#" class="popup-modal"
+                        data-toggle="modal" data-target="#CardDetails">View/Edit Card Details</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+</div>
+
+<div class="container">
+<div id="div4" class="done-card-list" ondrop="drop(event, this)" ondragover="allowDrop(event)">
+    <div class="sub-card-list-title">
+        Done
+    </div>
+
+        <div id="drag4" class="card" draggable="true" ondragstart="drag(event)" ondrop="return false" ondragover="return false">
+        <div class="card-body">
+            <h5 class="card-title">PBI 1</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <div class="center">
+                <button href="#" class="popup-modal"
+                        data-toggle="modal" data-target="#CardDetails">View/Edit Card Details</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+</div>
+
 </div>
 
 <!-- Card Details Modal -->
 <div class="modal fade" id="CardDetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="CardDetails title">Card Details</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <textarea class="form-control" id="message-text" style="height:500px"></textarea>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <!-- Header w/ Card Title -->
+        <div class="modal-header">
+            <textarea class="form-control" id="message-text" placeholder="Enter Card Title" style="height:50px"></textarea>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <!-- Body w/ Difficulty, Description, Acceptance Criteria -->
+        <div class="container">
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Difficulty:</span>
+                </div>
+                <input type="number" class="form-control" aria-label="With textarea" placeholder="Enter Difficulty"></input>
+            </div>
+            <!-- 2 columns w/ Description and Acceptance Criteria -->
+            <div class="row">
+                <div class="col">
+                    <h5 class="modal-title" id="Description title">Description</h5>
+                    <textarea class="form-control" id="description-text" placeholder="Enter Description" style="height:500px"></textarea>
+                </div>
+                <div class="col">
+                    <h5 class="modal-title" id="AC title">Acceptance Criteria</h5>
+                    <textarea class="form-control" id="AC-text" placeholder="Enter Acceptance Criteria" style="height:500px"></textarea>
+                </div>
+            </div>
+        </div>
+        <!-- Footer w/ "Save Changes" button -->
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>

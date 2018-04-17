@@ -1,7 +1,67 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
 
+<style>
+.button {
+    background-color: #008CBA;
+    color: black;
+    padding: 15px 32px;
+    border: 1px solid black;
+    text-align: center;
+    font-size: 20px;
+    cursor: pointer;
+}
+input[type=text]{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    border: 1px solid black;
+    box-sizing: border-box;
+}
+input[type=password]{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    border: 1px solid black;
+    box-sizing: border-box;
+}
+input[type=submit]{
+    width:100%;
+    background-color: #008CBA;
+    color: black;
+    padding: 15px 32px;
+    border: 1px solid black;
+    text-align: center;
+    font-size: 20px;
+    cursor: pointer;
+}
+header {
+    text-align: center;
+    position: relative;
+    top: 20px;
+    font-size: 32px;
+    font-family: "Arial";
+}
+div {
+    margin: auto;
+    background-color: powderblue;
+    padding: 20px;
+    width: 50%;
+}
+</style>
+</head>
 {% block content %}
-    <h1>Register</h1>
+<body>
+<a href={{url_for('login')}} button class="button">Back</a>
+
+<header>
+    <h1>Create An Account</h1>
+</header>
+
+<div>
     <form action="" method="post">
         {{ form.hidden_tag() }}
         <p>
@@ -34,5 +94,8 @@
             {% endfor %}
         </p>
         <p>{{ form.submit() }}</p>
-    </form>
+    </form>  
+</div>
+</body>
 {% endblock %}
+</html>

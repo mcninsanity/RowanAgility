@@ -23,11 +23,9 @@ class User_StoriesForm(FlaskForm):
     Github_link = StringField('Github_link')
 
 class SprintForm(FlaskForm):
-    end_date = DateField('end_date')
-    Start_date = DateField('Start_date')
+    end_date = DateField('end_date', format='%m-%d-%Y')
+    Start_date = DateField('Start_date', format='%m-%d-%Y')
     Sprint_num = StringField('Sprint_num')
-    Description = StringField('Descriprion')
-    Github_link = StringField('Github_link')
 
 class TodoForm(FlaskForm):
     status = BooleanField('stats')

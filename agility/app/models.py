@@ -129,8 +129,8 @@ class Sprint(db.Model):
     __tablename__ = 'sprint'
     sprint_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     end_date = db.Column(db.DateTime)
-    Start_date = db.Column(db.DateTime)
-    Sprint_num = db.Column(db.Integer)
+    start_date = db.Column(db.DateTime)
+    sprint_num = db.Column(db.Integer)
     #Teams = db.relationship('Team', secondary=team_sprint_table, backref=db.backref('teamsprints', lazy='dynamic'))
     #user_stories = db.relationship('User_Stories', secondary=user_stories_sprint_table, backref=db.backref('sprintus', lazy='dynamic'))
-    #projects = db.relationship('Project', secondary=project_sprint_table, backref=db.backref('sprintproj', lazy='dynamic'))
+    projects = db.relationship('Project', secondary=project_sprint_table, backref=db.backref('sprintproj', lazy='dynamic'))

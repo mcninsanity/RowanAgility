@@ -1,38 +1,61 @@
-<div class="modal fade" id="CardDetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-       {% block content %}
-    <h1>Create Sprint</h1>
-    <form action="" method="post">
-        {{ form.hidden_tag() }}
-        <p>
-            {{ form.start_date.label }}<br>
-            {{ form.start_date(size=45) }}<br>
-            {% for error in form.start_date.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.end_date.label }}<br>
-            {{ form.end_date(size=45) }}<br>
-            {% for error in form.end_date.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <p>
-            {{ form.sprint_num.label }}<br>
-            {{ form.sprint_num(size=45) }}<br>
-            {% for error in form.sprint_num.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>{{ form.submit() }}</p>
-    </form>
-{% endblock %}
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
+     <!-- Bootstrap CSS -->
+    <link type="text/css" rel="stylesheet" href="../static/css/bootstrap.css">
+
+    <!-- Bootstrap Grid CSS -->
+    <link type="text/css" rel="stylesheet" href="../static/css/bootstrap-grid.css">
+
+    <!-- Bootstrap Reboot CSS -->
+    <link type="text/css" rel="stylesheet" href="../static/css/bootstrap-reboot.css">
+
+    <!-- Hover CSS -->
+    <link type="text/css" rel="stylesheet" href="../static/css/hover-min.css">
+
+    <!-- Style Sheet CSS -->
+    <link type="text/css" rel="stylesheet" href="../static/css/style.css">
+
+    <title>Create Sprint</title>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+    <a class="navbar-brand" href="#">Agility</a>
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="#">Team Page</a>
+        </li>
+    </ul>
+    <ul class="navbar-nav">
+
+        <li class="nav-item">
+            <a class="nav-link" href="#">Log Out</a>
+        </li>
+    </ul>
+</nav>
+
+<h1>Create Sprint</h1>
+
+
+<div class="project-form">
+<form action="/action_page.php">
+    <div class="form-group">
+        <label for="ProjectName">Start Date</label>
+        <input type="ProjectName" class="form-control" id="ProjectName" placeholder="MM-DD-YYYY">
     </div>
-  </div>
+    <div class="form-group">
+        <label for="GroupName">End Date</label>
+        <input type="GroupName" class="form-control" id="GroupName" placeholder="MM-DD-YYYY">
+    </div>
+    <div class="center">
+    <button type="submit" class="button hvr-shrink">Create New Sprint</button>
+    </div>
+</form>
 </div>
+
+</body>
+</html>
