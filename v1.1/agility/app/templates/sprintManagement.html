@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+<body>
+
+<h1>Sprint Management</h1>
+
+<!-- Product Backlog Sidebar -->
+<div class="card-list">
+
+    <div id="CardListTitle">
+        Product Backlog
+    </div>
+    {%  for p in prod_back_ids %}
+    <div class="card">
+        <div class="card-body">
+            <h3 class="card-title">{{ myfunction(p|string) }}</h3>
+            <p class="card-text">Difficulty: {{ get_difficulty(p|string) }}</p>
+            <div class="center">
+                <button href="#" class="popup-modal"
+                        data-toggle="modal" data-target="#CardDetails">View/Edit Card Details</button>
+            </div>
+        </div>
+    </div>
+    {%  endfor %}
+</div>
+
+<!-- Card Details Modal -->
+<div class="modal fade" id="CardDetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="CardDetails title">Card Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <textarea class="form-control" id="message-text" style="height:500px"></textarea>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn brn-secondary">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="sprint-management-scrollbox">
+    {%  for s in sprint_ids %}
+    <a href="/sprint/{{ s }}/{{ project_id }}" class="button sprint-management-button hvr-shrink">{{ get_sprint_num(s|string) }}</a>
+    {%  endfor %}
+
+</div>
+
+<script src="../static/js/jquery-3.3.1.js"></script>
+<script src="../static/js/popper.js"></script>
+<script src="../static/js/bootstrap.js"></script>
+
+</body>
+{% endblock %}
