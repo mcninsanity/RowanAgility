@@ -5,7 +5,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-
     <!-- Bootstrap CSS -->
     <link type="text/css" rel="stylesheet" href="../static/static/css/bootstrap.css">
 
@@ -27,13 +26,13 @@
 <body>
 
 <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
-    <a class="navbar-brand" href="#">Agility</a>
+    <a class="navbar-brand" href="/index">Agility</a>
     <ul class="navbar-nav mr-auto">
         <li class="nav-item">
             <a class="nav-link" href="/sprintmanage/{{ project_id }}">Sprint Management</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Team Page</a>
+            <a class="nav-link" href="/team/{{ project_id }}">Team Page</a>
         </li>
     </ul>
     <ul class="navbar-nav">
@@ -91,7 +90,7 @@
             <h5 class="card-title">{{ getUserStoryTitle(t|string) }}</h5>
             <h6 class="card-subtitle mb-2 text-muted">{{ getDifficulty(t|string) }}</h6>
             <div class="center">
-                <button href="#" class="popup-modal" onclick="myFunction('{{ getUserStoryTitle(p|string) }}', '{{ getDescription(p|string) }}', '{{ getAcceptanceCriteria(p|string) }}', '{{ getDifficulty(p|string) }}')"
+                <button href="#" class="popup-modal" onclick="myFunction('{{ getUserStoryTitle(t|string) }}', '{{ getDescription(t|string) }}', '{{ getAcceptanceCriteria(t|string) }}', '{{ getDifficulty(t|string) }}')"
                         data-toggle="modal" data-target="#CardDetails">View/Edit Card Details</button>
             </div>
         </div>
@@ -112,7 +111,7 @@
             <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
             <div class="center">
-                <button href="#" class="popup-modal" onclick="myFunction('{{ getUserStoryTitle(p|string) }}', '{{ getDescription(p|string) }}', '{{ getAcceptanceCriteria(p|string) }}', '{{ getDifficulty(p|string) }}')"
+                <button href="#" class="popup-modal" onclick="myFunction('{{ getUserStoryTitle(i|string) }}', '{{ getDescription(i|string) }}', '{{ getAcceptanceCriteria(i|string) }}', '{{ getDifficulty(i|string) }}')"
                         data-toggle="modal" data-target="#CardDetails">View/Edit Card Details</button>
             </div>
         </div>
@@ -133,7 +132,7 @@
             <h6 class="card-subtitle mb-2 text-muted">{{ getDifficulty(d|string) }}</h6>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
             <div class="center">
-                <button href="#" class="popup-modal" onclick="myFunction('{{ getUserStoryTitle(p|string) }}', '{{ getDescription(p|string) }}', '{{ getAcceptanceCriteria(p|string) }}', '{{ getDifficulty(p|string) }}')"
+                <button href="#" class="popup-modal" onclick="myFunction('{{ getUserStoryTitle(d|string) }}', '{{ getDescription(d|string) }}', '{{ getAcceptanceCriteria(d|string) }}', '{{ getDifficulty(d|string) }}')"
                         data-toggle="modal" data-target="#CardDetails">View/Edit Card Details</button>
             </div>
         </div>
@@ -146,7 +145,7 @@
 <div class="modal fade" id="CardDetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
-        <var id
+
         <!-- Header w/ Card Title -->
         <div class="modal-header">
             <textarea class="form-control" id="title" placeholder="Enter Card Title" style="height:50px"></textarea>
