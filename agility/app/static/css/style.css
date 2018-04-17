@@ -131,8 +131,8 @@ h1 {
     width: 20%;
     overflow-y: scroll;
     top: 150px;
-    bottom: 0px;
-    left: 350px;
+    bottom: 5%;
+    left: 21%;
     background-color: lightgray;
     border: 1px solid black;
 }
@@ -142,8 +142,8 @@ h1 {
     width: 20%;
     overflow-y: scroll;
     top: 150px;
-    bottom: 0px;
-    left: 675px;
+    bottom: 5%;
+    left: 43%;
     background-color: lightgray;
     border: 1px solid black;
 }
@@ -153,8 +153,8 @@ h1 {
     width: 20%;
     overflow-y: scroll;
     top: 150px;
-    bottom: 0px;
-    left: 1000px;
+    bottom: 5%;
+    left: 65%;
     background-color: lightgray;
     border: 1px solid black;
 }
@@ -198,8 +198,8 @@ h1 {
 }
 
 .sprint-button-position {
-    position: absolute;
+    position: fixed;
     top: 50%;
-    right: 0px;
+    right: 0;
 }
 
