@@ -1,23 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+     <!-- Required meta tags -->
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+
     <!-- Bootstrap CSS -->
-    <link type="text/css" rel="stylesheet" href="../static/css/bootstrap.css">
+    <link type="text/css" rel="stylesheet" href="../static/static/css/bootstrap.css">
 
     <!-- Bootstrap Grid CSS -->
-    <link type="text/css" rel="stylesheet" href="../static/css/bootstrap-grid.css">
+    <link type="text/css" rel="stylesheet" href="../static/static/css/bootstrap-grid.css">
 
     <!-- Bootstrap Reboot CSS -->
-    <link type="text/css" rel="stylesheet" href="../static/css/bootstrap-reboot.css">
-
-    <!-- Hover CSS -->
-    <link type="text/css" rel="stylesheet" href="../static/css/hover-min.css">
+    <link type="text/css" rel="stylesheet" href="../static/static/css/bootstrap-reboot.css">
 
     <!-- Style Sheet CSS -->
-    <link type="text/css" rel="stylesheet" href="../static/css/style.css">
+    <link type="text/css" rel="stylesheet" href="../static/static/css/style.css">
+
+    <!-- Hover CSS -->
+    <link type="text/css" rel="stylesheet" href="../static/static/css/hover-min.css">
+
 
     <title>Sprint Page</title>
 </head>
@@ -27,7 +30,7 @@
     <a class="navbar-brand" href="#">Agility</a>
     <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-            <a class="nav-link" href="#">Sprint Management</a>
+            <a class="nav-link" href="/sprintmanage/{{ project_id }}">Sprint Management</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#">Team Page</a>
@@ -36,7 +39,7 @@
     <ul class="navbar-nav">
 
         <li class="nav-item">
-            <a class="nav-link" href="#">Log Out</a>
+            <a class="nav-link" href="{{ url_for('logout') }}">Log Out</a>
         </li>
     </ul>
 </nav>
@@ -64,10 +67,10 @@
     {%  for p in prodBackIds %}
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title">{{ getTitle(p|string) }}</h5>
+            <h5 class="card-title">{{ getUserStoryTitle(p|string) }}</h5>
             <h6 class="card-subtitle mb-2 text-muted">{{ getDifficulty(p|string) }}</h6>
             <div class="center">
-                <button href="#" class="popup-modal"
+                <button href="#" class="popup-modal"  onclick="myFunction('{{ getUserStoryTitle(p|string) }}', '{{ getDescription(p|string) }}', '{{ getAcceptanceCriteria(p|string) }}', '{{ getDifficulty(p|string) }}')"
                         data-toggle="modal" data-target="#CardDetails">View/Edit Card Details</button>
             </div>
         </div>
@@ -85,10 +88,10 @@
         {% for t in todo %}
         <div class="card">
         <div class="card-body">
-            <h5 class="card-title">{{ getTitle(t|string) }}</h5>
+            <h5 class="card-title">{{ getUserStoryTitle(t|string) }}</h5>
             <h6 class="card-subtitle mb-2 text-muted">{{ getDifficulty(t|string) }}</h6>
             <div class="center">
-                <button href="#" class="popup-modal"
+                <button href="#" class="popup-modal" onclick="myFunction('{{ getUserStoryTitle(p|string) }}', '{{ getDescription(p|string) }}', '{{ getAcceptanceCriteria(p|string) }}', '{{ getDifficulty(p|string) }}')"
                         data-toggle="modal" data-target="#CardDetails">View/Edit Card Details</button>
             </div>
         </div>
@@ -105,11 +108,11 @@
         {% for i in inprogress %}
         <div class="card">
         <div class="card-body">
-            <h5 class="card-title">{{ getTitle(i|string) }}</h5>
+            <h5 class="card-title">{{ getUserStoryTitle(i|string) }}</h5>
             <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
             <div class="center">
-                <button href="#" class="popup-modal"
+                <button href="#" class="popup-modal" onclick="myFunction('{{ getUserStoryTitle(p|string) }}', '{{ getDescription(p|string) }}', '{{ getAcceptanceCriteria(p|string) }}', '{{ getDifficulty(p|string) }}')"
                         data-toggle="modal" data-target="#CardDetails">View/Edit Card Details</button>
             </div>
         </div>
@@ -126,11 +129,11 @@
         {% for d in done %}
         <div class="card">
         <div class="card-body">
-            <h5 class="card-title">{{ getTitle(d|string) }}</h5>
+            <h5 class="card-title">{{ getUserStoryTitle(d|string) }}</h5>
             <h6 class="card-subtitle mb-2 text-muted">{{ getDifficulty(d|string) }}</h6>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
             <div class="center">
-                <button href="#" class="popup-modal"
+                <button href="#" class="popup-modal" onclick="myFunction('{{ getUserStoryTitle(p|string) }}', '{{ getDescription(p|string) }}', '{{ getAcceptanceCriteria(p|string) }}', '{{ getDifficulty(p|string) }}')"
                         data-toggle="modal" data-target="#CardDetails">View/Edit Card Details</button>
             </div>
         </div>
@@ -139,24 +142,46 @@
 </div>
 </div>
 
-<!-- Card Details Modal -->
+ <!-- Card Details Modal -->
 <div class="modal fade" id="CardDetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="CardDetails title">Card Details</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <textarea class="form-control" id="message-text" style="height:500px"></textarea>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <var id
+        <!-- Header w/ Card Title -->
+        <div class="modal-header">
+            <textarea class="form-control" id="title" placeholder="Enter Card Title" style="height:50px"></textarea>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <!-- Body w/ Difficulty, Description, Acceptance Criteria -->
+        <div class="container">
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Difficulty:</span>
+                </div>
+                <input type="number" id="Difficulty" class="form-control" aria-label="With textarea" placeholder="Enter Difficulty"></input>
+            </div>
+            <!-- 2 columns w/ Description and Acceptance Criteria -->
+            <div class="row">
+                <div class="col">
+                    <h5 class="modal-title" id="CardDetails title">Description</h5>
+                    <textarea class="form-control" id="Description" placeholder="Enter Description" style="height:500px"></textarea>
+                </div>
+                <div class="col">
+                    <h5 class="modal-title" id="CardDetails title">Acceptance Criteria</h5>
+                    <textarea class="form-control" id="Acceptance" placeholder="Enter Acceptance Criteria" style="height:500px"></textarea>
+                </div>
+            </div>
+        </div>
+        <!-- Footer w/ "Save Changes" button -->
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
 </div>
+
 
 <!-- Sprint Review Modal -->
 <div class="modal fade" id="SprintReview" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -203,10 +228,19 @@
     </div>
 </div>
 
+<script>
+function myFunction(title, descrip, accept, diff) {
+    document.getElementById("title").defaultValue = title;
+    document.getElementById("Description").defaultValue = descrip;
+    document.getElementById("Acceptance").defaultValue = accept;
+    document.getElementById("Difficulty").defaultValue = diff;
 
-<script src="../static/js/jquery-3.3.1.js"></script>
-<script src="../static/js/popper.js"></script>
-<script src="../static/js/bootstrap.js"></script>
+}
+</script>
+
+<script src="../static/static/js/jquery-3.3.1.js"></script>
+<script src="../static/static/js/popper.js"></script>
+<script src="../static/static/js/bootstrap.js"></script>
 
 </body>
 </html>
