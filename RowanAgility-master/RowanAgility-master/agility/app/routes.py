@@ -198,8 +198,7 @@ def sprint_manage_endpoint(project_id):
     for sprint in sprints:
         sprintids.append(sprint[0])
 
-    pb = db.engine.execute("select user_stories_id from user_stories_sprint_table where user_stories_sprint_table.sprint_id in "
-                           "(select sprint_id from project_sprint_table where project_sprint_table.project_id = "+project_id+")")
+    pb = db.engine.execute("select user_stories_id from user_stories_project_table where user_stories_project_table.project_id = "+project_id)
 
     prodBackIds = []
     for prodback in pb:
@@ -264,7 +263,7 @@ def getUserStoryTitle(id:int):
 
 
 def getDifficulty(id:int):
-    diff = db.engine.execute("select difficulty from user_stories where user_stories.user_stories_id = " + id)
+    diff = db.engine.execute("select difficulty from user_stories where user_stories.user_stories_id = "+id)
 
     difficulty = []
     for d in diff:
@@ -289,21 +288,20 @@ def getAcceptanceCriteria(id:int):
         acceptance.append(acc[0])
     return acceptance[0]
 
-@app.route('/cardview/<user_stories_id>')
-@login_required
-def card_view_endpoint(user_stories_id):
-    difficulty = getDifficulty(user_stories_id)
-    title = getUserStoryTitle(user_stories_id)
-    acceptance = getAcceptanceCriteria(user_stories_id)
-    description = getDescription(user_stories_id)
+# @app.route('/createCard/<project_id>', methods =['GET', 'POST'])
+# @login_required
+# def create_card_endpoint(project_id):
+#
+#     form = UserStoriesForm()
+#     if form.validate_on_submit():
+#         user_stories_id = db.engine.execute("insert into user_stories (difficulty, acceptance_criteria, description, title) output Inserted.PrimaryKey "
+#                           "values ("+form.Difficulty.data+", '"+form.Acceptance.data+"', '"+form.Description.data+"', "+form.Title.data+"')")
+#         db.engine.execute("insert into user_stories_project_table (user_stories_id, project_id) values ("+user_stories_id+", "+project_id+")")
+#         flash('Congratulations, you made a Card!')
+#         # return render_template('index.html', title='Home', project=project)
+#         return redirect(url_for('index'))
+#     return render_template('CreateCard.html', title='Create Card', form=form)
 
-    return render_template('cardView.html', difficulty=difficulty, title=title, acceptance=acceptance, description=description)
-
-
-@app.route('/modaltest')
-def modaltest():
-
-    return render_template('cardView.html', getTitle=getTitle)
 
 
 
