@@ -7,7 +7,7 @@
             {% for p in project_ids %}
             <div class="container">
                 <a href="/project/{{p}}" class="button user-page-button hvr-shrink">{{ get_proj_name(p|string) }}</a>
-                <a href="/delete_project/{{p}}" class="button user-delproj-button hvr-shrink"> - </a>
+                <a class="button deleteproj"  href="/delete_project/{{p}}" onclick="return confirm('Are you sure?')">Delete Project</a>
             </div>
             {% endfor %}
             <div class="container">
