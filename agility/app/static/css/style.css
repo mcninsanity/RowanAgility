@@ -177,12 +177,13 @@ h1 {
 }
 
 .sprint-management-scrollbox {
-    float: right;
-    width: 70%;
-    height: 300px;
-    overflow-x: scroll;
-    overflow-y: hidden;
-    white-space: nowrap;
+    position: absolute;
+    width: 20%;
+    overflow-y: scroll;
+    right: 0px;
+    top: 56px;
+    bottom: 0px;
+    background-color: white;
     border: 1px solid black;
 }
 
