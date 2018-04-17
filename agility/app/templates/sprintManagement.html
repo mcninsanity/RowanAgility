@@ -23,6 +23,40 @@
 
 
     <title>Sprint Management</title>
+
+    <script>
+        var card = 1;
+        function add_card() {
+            card++;
+            var objTo = document.getElementById('CardList')
+            var divtest = document.createElement("div");
+            divtest.innerHTML = '<div class="card">\n' +
+                '        <div class="card-body">\n' +
+                '            <h5 class="card-title">PBI {{p}}</h5>\n' +
+                '            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>\n' +
+                '            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card\'s content.</p>\n' +
+                '            <div class="center">\n' +
+                '                <button href="#" class="popup-modal"\n' +
+                '                        data-toggle="modal" data-target="#CardDetails">View/Edit Card Details</button>\n' +
+                '            </div>\n' +
+                '        </div>\n' +
+                '    </div>';
+
+            objTo.appendChild(divtest)
+        }
+
+        var sprint = 1;
+        function add_sprint() {
+            sprint++;
+            var objTo = document.getElementById('SprintList')
+            var divtest = document.createElement("div");
+            divtest.innerHTML = '<a href="#" class="button sprint-button hvr-shrink">Sprint {{p}}</a>';
+
+            objTo.appendChild(divtest)
+        }
+
+
+    </script>
 </head>
 <body>
 
@@ -48,27 +82,18 @@
 <h1>Sprint Management</h1>
 
 <!-- Product Backlog Sidebar -->
-<div class="card-list">
+<div class="card-list" id="PbiSideBar" ondrop="drop(event, this)" ondragover="allowDrop(event)">
 
     <div id="CardListTitle">
         Product Backlog
     </div>
 
-    <div class="card" draggable="true">
-        <div class="card-body">
-            <h5 class="card-title">PBI 1</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <div class="center">
-                <button href="#" class="popup-modal"
-                        data-toggle="modal" data-target="#CardDetails">View/Edit Card Details</button>
-            </div>
-        </div>
-    </div>
 
+    <div id="CardList">
+    {% for p in [1,2,3,4,5,6,7,8] %}
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title">PBI 2</h5>
+            <h5 class="card-title">PBI {{p}}</h5>
             <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
             <div class="center">
@@ -77,59 +102,11 @@
             </div>
         </div>
     </div>
-
-    <div class="card">
-        <div class="card-body">
-            <h5 class="card-title">PBI 3</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <div class="center">
-                <button href="#" class="popup-modal"
-                        data-toggle="modal" data-target="#CardDetails">View/Edit Card Details</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-body">
-            <h5 class="card-title">PBI 4</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <div class="center">
-                <button href="#" class="popup-modal"
-                        data-toggle="modal" data-target="#CardDetails">View/Edit Card Details</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-body">
-            <h5 class="card-title">PBI 5</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <div class="center">
-                <button href="#" class="popup-modal"
-                        data-toggle="modal" data-target="#CardDetails">View/Edit Card Details</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-body">
-            <h5 class="card-title">PBI 6</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <div class="center">
-                <button href="#" class="popup-modal"
-                        data-toggle="modal" data-target="#CardDetails">View/Edit Card Details</button>
-            </div>
-        </div>
+    {% endfor %}
     </div>
 
 
-
-    <a href="#" class="button hvr-shrink"
-                        data-toggle="modal" data-target="#CardDetails">+ Add New Card</a>
+    <input type='button' class="button hvr-shrink" onclick="add_card();" value="+ Add New Card">
 
 </div>
 
@@ -173,24 +150,33 @@
 </div>
 
 
-<div class="sprint-management-scrollbox">
-    <a href="#" class="button sprint-management-button hvr-shrink">Sprint 1</a>
-    <a href="#" class="button sprint-management-button hvr-shrink">Sprint 2</a>
-    <a href="#" class="button sprint-management-button hvr-shrink">Sprint 3</a>
-    <a href="#" class="button sprint-management-button hvr-shrink">Sprint 4</a>
-    <a href="#" class="button sprint-management-button hvr-shrink">Sprint 5</a>
-    <a href="#" class="button sprint-management-button hvr-shrink">Sprint 6</a>
-    <a href="#" class="button sprint-management-button hvr-shrink">Sprint 7</a>
-    <a href="#" class="button sprint-management-button hvr-shrink">Sprint 8</a>
-    <a href="#" class="button sprint-management-button hvr-shrink">Sprint 9</a>
-    <a href="#" class="button sprint-management-button hvr-shrink">Sprint 10</a>
-    <a href="#" class="button sprint-management-button hvr-shrink">Sprint 11</a>
-    <a href="#" class="button sprint-management-button hvr-shrink">Sprint 12</a>
-    <a href="#" class="button sprint-management-button hvr-shrink">Sprint 13</a>
-    <a href="#" class="button sprint-management-button hvr-shrink">Sprint 14</a>
-    <a href="#" class="button sprint-management-button hvr-shrink">Sprint 15</a>
-    <a href="#" class="button sprint-management-button hvr-shrink">Sprint 16</a>
-    <a href="#" class="button hvr-shrink">+ Add New Sprint</a>
+<!--<div id="SprintScrollbox" class="sprint-management-scrollbox">-->
+    <!---->
+    <!--{% for p in [1,2,3,4,5,6,7,8] %}-->
+    <!--<a href="#" class="button sprint-management-button hvr-shrink">Sprint {{p}}</a>-->
+    <!--{% endfor %}-->
+
+    <!--<input type="button" class="button hvr-shrink" onclick="add_sprint();" value="+ Add New Card">-->
+
+
+<!--</div>-->
+
+<!-- Sprint Sidebar -->
+<div class="sprint-management-scrollbox" id="SprintSideBar" ondrop="drop(event, this)" ondragover="allowDrop(event)">
+
+    <div id="CardListTitle">
+        Sprints
+    </div>
+
+
+    <div id="SprintList">
+    {% for p in [1,2,3,4,5,6,7,8] %}
+    <a href="#" class="button sprint-button hvr-shrink">Sprint {{p}}</a>
+    {% endfor %}
+    </div>
+
+
+    <input type='button' class="button sprint-button hvr-shrink" onclick="add_sprint();" value="+ Add New Sprint">
 
 </div>
 
