@@ -24,7 +24,7 @@ def index():
 
 
 def getProjName(project_id :int):
-    projName = db.engine.execute("select project.ProjName from project where project.project_id = "+project_id)
+    projName = db.engine.execute("select project.proj_name from project where project.project_id = "+project_id)
 
     pname = []
     for name in projName:
@@ -205,7 +205,7 @@ def sprint_manage_endpoint(project_id):
     for prodback in pb:
         prodBackIds.append(prodback[0])
 
-    return render_template('sprintManagement.html', getSprintNum=getSprintNum, sprintids=sprintids, prodBackIds=prodBackIds, myfunction=getTitle, getDifficulty=getDifficulty, project_id=project_id)
+    return render_template('newsprintManagement.html', getSprintNum=getSprintNum, sprintids=sprintids, prodBackIds=prodBackIds, getUserStoryTitle=getUserStoryTitle, getDifficulty=getDifficulty, getDescription=getDescription, getAcceptanceCriteria=getAcceptanceCriteria, project_id=project_id)
 
 
 def getSprintNum(sprint_id):
@@ -251,14 +251,10 @@ def sprint_endpoint(idsprint, project_id):
     for prodback in pb:
         prodBackIds.append(prodback[0])
 
-    return render_template('Sprint.html', project_id=project_id, todo=todo, inprogress=inprogress, done=done, prodBackIds=prodBackIds, getTitle=getTitle, getDifficulty=getDifficulty)
+    return render_template('Sprint.html', project_id=project_id, todo=todo, inprogress=inprogress, done=done, prodBackIds=prodBackIds, getUserStoryTitle=getUserStoryTitle, getDescription=getDescription, getAcceptanceCriteria=getAcceptanceCriteria, getDifficulty=getDifficulty)
 
 
-def getCurrentSprint(project_id):
-    curr_sprint = db.engine.execute("select sprint_id from sprint join ")
-
-
-def getTitle(id:int):
+def getUserStoryTitle(id:int):
     userstorytitle = db.engine.execute("select title from user_stories where user_stories.user_stories_id = "+id)
 
     title = []
@@ -286,12 +282,29 @@ def getDescription(id:int):
 
 
 def getAcceptanceCriteria(id:int):
-    accept = db.engine.ececute("select acceptance_criteria from user_stories where user_stories.user_stories_id = "+id)
+    accept = db.engine.execute("select acceptance_criteria from user_stories where user_stories.user_stories_id = "+id)
 
     acceptance = []
     for acc in accept:
-        acceptance.append(accept[0])
+        acceptance.append(acc[0])
     return acceptance[0]
+
+@app.route('/cardview/<user_stories_id>')
+@login_required
+def card_view_endpoint(user_stories_id):
+    difficulty = getDifficulty(user_stories_id)
+    title = getUserStoryTitle(user_stories_id)
+    acceptance = getAcceptanceCriteria(user_stories_id)
+    description = getDescription(user_stories_id)
+
+    return render_template('cardView.html', difficulty=difficulty, title=title, acceptance=acceptance, description=description)
+
+
+@app.route('/modaltest')
+def modaltest():
+
+    return render_template('cardView.html', getTitle=getTitle)
+
 
 
 
