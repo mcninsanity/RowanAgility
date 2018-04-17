@@ -117,17 +117,18 @@ h1 {
 }
 
 .card-list {
-    position: fixed;
+    position: absolute;
     width: 20%;
     overflow-y: scroll;
     top: 56px;
     bottom: 0px;
+    left: 0ox;
     background-color: lightgray;
     border: 1px solid black;
 }
 
 .todo-card-list {
-    position: fixed;
+    position: absolute;
     width: 20%;
     overflow-y: scroll;
     top: 150px;
@@ -138,7 +139,7 @@ h1 {
 }
 
 .inprogress-card-list {
-    position: fixed;
+    position: absolute;
     width: 20%;
     overflow-y: scroll;
     top: 150px;
@@ -149,7 +150,7 @@ h1 {
 }
 
 .done-card-list {
-    position: fixed;
+    position: absolute;
     width: 20%;
     overflow-y: scroll;
     top: 150px;

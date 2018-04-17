@@ -12,7 +12,7 @@ def home():
 
     #return render_template('project.html', sprints=sprints, totalDiff=totalDiff, completeDiff=completeDiff)
 
-    return render_template('sprintManagement.html')
+    return render_template('Sprint.html')
 
 
 if __name__ == "__main__":
