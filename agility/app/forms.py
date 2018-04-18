@@ -22,8 +22,8 @@ class User_StoriesForm(FlaskForm):
     difficulty = IntegerField('Difficulty')
     acceptance_criteria = StringField('Acceptance_criteria')
     status = StringField('Status')
-    description = StringField('Descriprion')
-
+    description = StringField('Description')
+    title = StringField('Title')
 
 class TodoForm(FlaskForm):
     status = BooleanField('stats')

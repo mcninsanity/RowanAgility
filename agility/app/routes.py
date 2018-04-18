@@ -128,15 +128,14 @@ def project_endpoint(project_id):
                                    " (user_stories_sprint_table.sprint_id = sprint.sprint_id) join project_sprint_table on"
                                    " (sprint.sprint_id = project_sprint_table.sprint_id) join project on"
                                    " (project_sprint_table.project_id = project.project_id)"
-                                   "where project.project_id = '" + project_id + "' and sprint.sprint_num = '" + str(
-            num) + "'").scalar()
+                                   "where project.project_id = '" + project_id + "' and sprint.sprint_num = '" + str(num) + "'").scalar()
         total = total + int(little)
         completeDiff.append(total)
     for num in sprints_num2:
         totalDiff.append(int(big))
-    # totalDiff = [50, 65, 80, 70]
-    # completeDiff = [0, 20, 33, 55]
-    # sprints = [1, 2, 3, 4]
+    #totalDiff = [50, 65, 80, 70]
+    #completeDiff = [0, 20, 33, 55]
+    #sprints = [1, 2, 3, 4]
     return render_template('project.html', title="Project page", get_proj_name=get_proj_name,
                            currentSprint=currentSprint, project_id=project_id,
                            sprints=sprints, totalDiff=totalDiff, completeDiff=completeDiff)
@@ -196,6 +195,20 @@ def create_sprint(project_id):
         return redirect(url_for('sprint_endpoint', project_id=project_id, sprint_id=next_sprint))
     return render_template('createSprint.html', title='Create Sprint', form=form, project_id=project_id)
 
+@app.route('/create_card/<project_id>', methods=['GET', 'POST'])
+@login_required
+def create_card(project_id):
+    form = User_StoriesForm()
+    if form.validate():
+        user_stories = User_Stories(Difficulty=form.difficulty.data, Acceptance_crrteria=form.acceptance_criteria.data,
+                                    title=form.title.data)
+        project = Project.query.filter_by(project_id=project_id).first()
+        db.session.add(user_stories)
+        User_Stories.projects.append(project)
+        db.session.commit()
+        flash('Congratulations, you made a User Story!')
+        return redirect(url_for('project_endpoint_endpoint', project_id=project_id))
+    return render_template('createSprint.html', title='Create Project', form=form, project_id=project_id)
 
 @app.route('/delete_card')  # Pop up with warning and confirmation
 def delete_card(user_stories_id):

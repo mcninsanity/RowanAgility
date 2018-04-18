@@ -45,6 +45,11 @@ user_stories_sprint_table = db.Table('user_stories_sprint_table',
                                                db.ForeignKey('user_stories.user_stories_id'))
                                      )
 
+user_stories_project_table = db.Table('user_stories_project_table',
+                                     db.Column('project_id', db.Integer, db.ForeignKey('project.project_id')),
+                                     db.Column('user_stories_id', db.Integer,
+                                               db.ForeignKey('user_stories.user_stories_id'))
+                                     )
 
 # check
 class User(UserMixin, db.Model):
@@ -127,6 +132,7 @@ class User_Stories(db.Model):
     sprints = db.relationship('Sprint', secondary=user_stories_sprint_table, backref=db.backref('teamusers', lazy='dynamic'))
     us_todo = db.relationship('To_do', backref=db.backref('usto_do'))
     us_req = db.relationship('Requirements', backref=db.backref('us_req'))
+    projects = db.relationship('Project', secondary=user_stories_project_table, backref=db.backref('usproj', lazy='dynamic'))
 
 
 class Role(db.Model):
