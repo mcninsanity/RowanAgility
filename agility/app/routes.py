@@ -1,6 +1,6 @@
 from flask import render_template, flash, redirect, url_for, request, json
 from app import app, db
-from app.forms import LoginForm, RegistrationForm, ProjectForm, SprintForm
+from app.forms import LoginForm, RegistrationForm, ProjectForm, SprintForm, User_StoriesForm
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User, Project, Team, Sprint
 from werkzeug.urls import url_parse
@@ -208,7 +208,7 @@ def create_card(project_id):
         db.session.commit()
         flash('Congratulations, you made a User Story!')
         return redirect(url_for('project_endpoint_endpoint', project_id=project_id))
-    return render_template('createSprint.html', title='Create Project', form=form, project_id=project_id)
+    return render_template('createUserStory.html', title='Create User Story', form=form, project_id=project_id)
 
 @app.route('/delete_card')  # Pop up with warning and confirmation
 def delete_card(user_stories_id):
