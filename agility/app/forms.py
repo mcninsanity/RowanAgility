@@ -3,6 +3,7 @@ from wtforms import StringField, IntegerField, PasswordField, BooleanField, Subm
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
 from app.models import User
 
+
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
@@ -11,39 +12,38 @@ class LoginForm(FlaskForm):
 
 
 class ProjectForm(FlaskForm):
-    ProjName = StringField('Project Name')
+    proj_name = StringField('Project Name')
     submit = SubmitField('Submit')
     team_name = StringField('Team Name')
+    github_link = StringField('Github Link')
+
 
 class User_StoriesForm(FlaskForm):
-    Difficulty = IntegerField('Difficulty')
-    Acceptance_criteria = StringField('Acceptance_criteria')
-    Status = StringField('Status')
-    Description = StringField('Descriprion')
-    Github_link = StringField('Github_link')
+    difficulty = IntegerField('Difficulty')
+    acceptance_criteria = StringField('Acceptance_criteria')
+    status = StringField('Status')
+    description = StringField('Descriprion')
 
-class SprintForm(FlaskForm):
-    end_date = DateField('end_date', format='%m-%d-%Y')
-    Start_date = DateField('Start_date', format='%m-%d-%Y')
-    Sprint_num = StringField('Sprint_num')
 
 class TodoForm(FlaskForm):
     status = BooleanField('stats')
     text = StringField('text')
 
-class requirementsForm(FlaskForm):
+
+class RequirementsForm(FlaskForm):
     status = BooleanField('stats')
     text = StringField('text')
 
+
 class RoleForm(FlaskForm):
     title = StringField('title')
+
 
 class RegistrationForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
-    password2 = PasswordField(
-        'Repeat Password', validators=[DataRequired(), EqualTo('password')])
+    password2 = PasswordField('Repeat Password', validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Register')
 
     def validate_username(self, username):
@@ -57,3 +57,8 @@ class RegistrationForm(FlaskForm):
             raise ValidationError('Please use a different email address.')
 
 
+class SprintForm(FlaskForm):
+    start_date = DateField('Start Date (YYYY-MM-DD)', format='%m-%d-%Y')
+    end_date = DateField('End Date (YYYY-MM-DD)', format='%m-%d-%Y')
+    sprint_num = IntegerField('Sprint Number')
+    submit = SubmitField('Submit')

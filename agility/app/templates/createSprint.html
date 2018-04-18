@@ -40,22 +40,22 @@
 
 <h1>Create Sprint</h1>
 
+{% extends "base.html" %}
 
-<div class="project-form">
-<form action="/action_page.php">
-    <div class="form-group">
-        <label for="ProjectName">Start Date</label>
-        <input type="ProjectName" class="form-control" id="ProjectName" placeholder="MM-DD-YYYY">
+{% block content %}
+    <div class="container">
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.start_date.label }}<br>
+             {{ form.start_date(size=45) }}<br>
+        </p>
+        <p>
+            {{ form.end_date.label }}<br>
+            {{ form.end_date(size=45) }}<br>
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
     </div>
-    <div class="form-group">
-        <label for="GroupName">End Date</label>
-        <input type="GroupName" class="form-control" id="GroupName" placeholder="MM-DD-YYYY">
-    </div>
-    <div class="center">
-    <button type="submit" class="button hvr-shrink">Create New Sprint</button>
-    </div>
-</form>
-</div>
-
-</body>
+{% endblock %}
 </html>

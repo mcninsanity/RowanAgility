@@ -31,26 +31,31 @@
             var objTo = document.getElementById('CardList')
             var divtest = document.createElement("div");
             divtest.innerHTML = '<div class="card">\n' +
-                '        <div class="card-body">\n' +
-                '            <h5 class="card-title">PBI {{p}}</h5>\n' +
-                '            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>\n' +
-                '            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card\'s content.</p>\n' +
-                '            <div class="center">\n' +
-                '                <button href="#" class="popup-modal"\n' +
-                '                        data-toggle="modal" data-target="#CardDetails">View/Edit Card Details</button>\n' +
-                '            </div>\n' +
-                '        </div>\n' +
-                '    </div>';
+            '            <div class="card-body">\n' +
+            '                <h5 class="card-title">PBI {{p}}</h5>\n' +
+            '                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>\n' +
+            '                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card\'s content.</p>\n' +
+            '                <div class="center">\n' +
+            '                    <button href="#" class="popup-modal"\n' +
+            '                            data-toggle="modal" data-target="#CardDetails">View/Edit Card Details</button>\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '        </div>';
+
             objTo.appendChild(divtest)
         }
+
         var sprint = 1;
         function add_sprint() {
             sprint++;
             var objTo = document.getElementById('SprintList')
             var divtest = document.createElement("div");
             divtest.innerHTML = '<a href="#" class="button sprint-button hvr-shrink">Sprint {{p}}</a>';
+
             objTo.appendChild(divtest)
         }
+
+
     </script>
 </head>
 <body>
@@ -85,19 +90,19 @@
 
 
     <div id="CardList">
-    {% for p in prodBackIds %}
+    {% for p in prod_back_ids %}
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title">{{ get_user_stories_title(p|string) }}</h5>
+            <h5 class="card-title">{{ get_title(p|string) }}</h5>
             <h6 class="card-subtitle mb-2 text-muted">{{ get_difficulty(p|string) }}</h6>
             <div class="center">
-                <button href="#" id="card" value="{{ p }}" class="popup-modal" onclick="myFunction('{{ get_user_stories_title(p|string) }}', '{{ getDescription(p|string) }}', '{{ getAcceptanceCriteria(p|string) }}', '{{ get_difficulty(p|string) }}')"
+                <button href="#" id="card" value="" class="popup-modal" onclick="myFunction('{{ get_title(p|string) }}', '{{ get_description(p|string) }}', '{{ get_acceptance_criteria(p|string) }}', '{{ get_difficulty(p|string) }}')"
                         data-toggle="modal" data-target="#CardDetails">View/Edit Card Details</button>
             </div>
         </div>
     </div>
     {% endfor %}
-    </div>
+</div>
 
 
     <input type='button' class="button hvr-shrink" onclick="add_card();" value="+ Add New Card">
@@ -110,7 +115,7 @@
     <div class="modal-content">
         <!-- Header w/ Card Title -->
         <div class="modal-header">
-            <textarea class="form-control" id="message-text" placeholder="Enter Card Title" style="height:50px"></textarea>
+            <textarea class="form-control" id="Title" placeholder="Enter Card Title" style="height:50px"></textarea>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -121,17 +126,17 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text">Difficulty:</span>
                 </div>
-                <input type="number" class="form-control" aria-label="With textarea" placeholder="Enter Difficulty"></input>
+                <input type="number" class="form-control" id="Difficulty" aria-label="With textarea" placeholder="Enter Difficulty"></input>
             </div>
             <!-- 2 columns w/ Description and Acceptance Criteria -->
             <div class="row">
                 <div class="col">
                     <h5 class="modal-title" id="CardDetails title">Description</h5>
-                    <textarea class="form-control" id="message-text" placeholder="Enter Description" style="height:500px"></textarea>
+                    <textarea class="form-control" id="Description" placeholder="Enter Description" style="height:500px"></textarea>
                 </div>
                 <div class="col">
                     <h5 class="modal-title" id="CardDetails title">Acceptance Criteria</h5>
-                    <textarea class="form-control" id="message-text" placeholder="Enter Acceptance Criteria" style="height:500px"></textarea>
+                    <textarea class="form-control" id="Acceptance" placeholder="Enter Acceptance Criteria" style="height:500px"></textarea>
                 </div>
             </div>
         </div>
@@ -164,7 +169,7 @@
 
 
     <div id="SprintList">
-    {% for p in sprintids %}
+    {% for p in sprint_ids %}
     <a href="/sprint/{{ p }}/{{  project_id }}" class="button sprint-button hvr-shrink">{{ get_sprint_num(p|string) }}</a>
     {% endfor %}
     </div>
@@ -176,7 +181,7 @@
 
 <script>
 function myFunction(title, descrip, accept, diff) {
-    document.getElementById("title").defaultValue = title;
+    document.getElementById("Title").defaultValue = title;
     document.getElementById("Description").defaultValue = descrip;
     document.getElementById("Acceptance").defaultValue = accept;
     document.getElementById("Difficulty").defaultValue = diff;
