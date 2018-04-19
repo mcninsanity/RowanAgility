@@ -24,6 +24,14 @@
     <!-- Plotly -->
     <script src="../static/js/plotly-latest.min.js"></script>
 
+    <script>
+    function setGitHubLink() {
+        var link = document.getElementById("GH-messsage-text").value;
+        document.getElementById("GitHubLink").href = link;
+    }
+
+</script>
+
 
     <title>Project Page</title>
 </head>
@@ -31,7 +39,6 @@
 
 
 <h1>Project Name</h1>
-<p id="summary">Project Summary</p>
 <div class="center">
     <button href="#" class="popup-modal"
                     data-toggle="modal" data-target="#DoD">Definition of Done</button>
@@ -46,6 +53,17 @@
             <!-- Project Management Buttons -->
             <a href="#" class="button project-page-button hvr-shrink">Sprint Management</a>
             <a href="#" class="button project-page-button hvr-shrink">Current Sprint</a>
+
+            <div id="gh" class="row">
+                <div class="col">
+                    <button href="#" class="button project-page-button"
+                    data-toggle="modal" data-target="#GitHubLinkModal">Edit GitHub Link</button>
+                </div>
+                <div class="col">
+                    <a href="#" id="GitHubLink" class="button project-page-button hvr-shrink">Project GitHub</a>
+                </div>
+            </div>
+
             <a href="https://www.github.com" class="button project-page-button hvr-shrink">Project Github</a>
             <a href="#" class="button project-page-button hvr-shrink">Team Page</a>
         </div>
@@ -70,6 +88,24 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- GitHub Link Modal -->
+<div class="modal fade" id="GitHubLinkModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="GHLink title">Enter GitHub Link</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <textarea class="form-control" id="GH-message-text" style="height:100px"></textarea>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" onclick="setGitHubLink();">Save changes</button>
       </div>
     </div>
   </div>
@@ -117,5 +153,6 @@ var data = [trace0, trace1];
 
 Plotly.newPlot('burnup', data, layout);
 </script>
+
 </body>
 </html>
