@@ -22,6 +22,26 @@
     <title>Sprint Page</title>
 
     <script>
+    var card = 1;
+    function add_card() {
+        card++;
+        var objTo = document.getElementById('CardList')
+        var divtest = document.createElement("div");
+        divtest.innerHTML = '<div class="card">\n' +
+            '        <div class="card-body">\n' +
+            '            <h5 class="card-title">PBI {{p}}</h5>\n' +
+            '            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>\n' +
+            '            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card\'s content.</p>\n' +
+            '            <div class="center">\n' +
+            '                <button href="#" class="popup-modal"\n' +
+            '                        data-toggle="modal" data-target="#CardDetails">View/Edit Card Details</button>\n' +
+            '            </div>\n' +
+            '        </div>\n' +
+            '    </div>';
+
+        objTo.appendChild(divtest)
+    }
+
     function allowDrop(ev) {
         ev.preventDefault();
     }
@@ -33,6 +53,10 @@
     function drop(ev, el) {
         ev.preventDefault();
         var data = ev.dataTransfer.getData("text");
+        el.appendChild(document.getElementById(data));
+    }
+
+    function dragging(ev, el) {
         el.appendChild(document.getElementById(data));
     }
     </script>
@@ -89,7 +113,10 @@
             </div>
         </div>
     </div>
-
+    <div class="center">
+    <input id="NewCardButton" type='button' class="button hvr-shrink" onclick="add_card();" value="+ Add New Card" +
+           draggable="true" ondragstart="drag(event)" ondrop="return false" ondragover="return false">
+    </div>
 </div>
 
 <div class="container">
