@@ -97,19 +97,21 @@
     </div>
 </div>
 
-<div id="div1" class="card-list" ondrop="drop(event, this)" ondragover="allowDrop(event)">
+<div id="div1" class="card-list" ondrop="drop(event,cardlist)" ondragover="allowDrop(event)">
     <div id="CardListTitle">
         Product Backlog
     </div>
 
-    <div id="drag1" class="card" draggable="true" ondragstart="drag(event)" ondrop="return false" ondragover="return false">
-        <div class="card-body">
-            <h5 class="card-title">PBI 1</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <div class="center">
-                <button href="#" class="popup-modal"
-                        data-toggle="modal" data-target="#CardDetails">View/Edit Card Details</button>
+    <div id="cardlist">
+        <div id="drag1" class="card" draggable="true" ondragstart="drag(event)" ondrop="return false" ondragover="return false">
+            <div class="card-body">
+                <h5 class="card-title">PBI 1</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <div class="center">
+                    <button href="#" class="popup-modal"
+                            data-toggle="modal" data-target="#CardDetails">View/Edit Card Details</button>
+                </div>
             </div>
         </div>
     </div>
